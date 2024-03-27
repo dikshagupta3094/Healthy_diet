@@ -1,0 +1,32 @@
+{
+  "name": "healthy_diet",
+  "version": "1.0.0",
+  "description": "\"A healthy diet online search application in which user and diet expert can connect ot each other\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dikshagupta3094/Healthy_diet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dikshagupta3094/Healthy_diet/issues"
+  },
+  "homepage": "https://github.com/dikshagupta3094/Healthy_diet#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "email-validator": "^2.0.4",
+    "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
