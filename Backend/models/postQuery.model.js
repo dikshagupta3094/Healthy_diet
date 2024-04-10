@@ -6,9 +6,10 @@ const postQuerySchema = new mongoose.Schema({
         ref:'user',
         required:true
     },
-    title:{
-        type:String,
-        required:true
+    expertId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        default:null
     },
     content:{
         type:String,
@@ -16,7 +17,16 @@ const postQuerySchema = new mongoose.Schema({
     },
     dietaryGoals:{
         type:[String]
-    }
+    },
+    age:{
+        type:Number,
+        required:true,
+    },
+    status:{
+        type:String,
+        enum:['pending','answered'],
+        default:'pending'
+    },
 },{timestamps:true,versionKey:false})
 
 module.exports = new mongoose.model('PostQuery',postQuerySchema)

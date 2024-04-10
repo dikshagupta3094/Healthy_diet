@@ -44,7 +44,7 @@ const verifyToken = async(req,res,next)=>{
   //     })
   //   }
     req.user = user
-    console.log("REQ USER",req.user);
+    // console.log("REQ USER",req.user);
     next()
 
  
@@ -61,8 +61,20 @@ const postQueryValidation =(role)=>{
      next()
   }
 }
+
+const postSolutionValidation = (role)=>{
+  return (req,res,next)=>{
+    if(req.user.role !=role){
+      console.log("Role as diet expert: ",req.user.role);
+      const error = new CustomError('Only diet expert can post solution',401)
+    next(error)
+    }
+    next()
+  }
+}
 module.exports = {
     registerValidtion,
     verifyToken,
-    postQueryValidation
+    postQueryValidation,
+    postSolutionValidation
 }
