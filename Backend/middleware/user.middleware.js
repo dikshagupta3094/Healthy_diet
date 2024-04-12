@@ -1,6 +1,4 @@
-const user_model = require('../models/user.model.js')
 const validator = require('email-validator')
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const CustomError = require('../utilis/customError.utilis.js')
 
@@ -22,27 +20,6 @@ const verifyToken = async(req,res,next)=>{
   }
 
   const user =await  jwt.verify(token,process.env.SECRET)
-  
-  // const token = req.headers['x-access-token']
-  // if(!token){
-  //   return res.status(401).json({
-  //     success:false,
-  //     message:"Unautharized token"
-  //   })
-  // }
-  // jwt.verify(token,process.env.SECRET,async(err,decode)=>{
-  //   if(err){
-  //    return res.status(401).json({
-  //        msg:"unauthorized"
-  //     })
-  //   }
-  //   const user = await user_model.findOne({userId:decode.id})
-  //   console.log(user);
-  //   if(!user){
-  //     return res.status(401).json({
-  //       msg:"User is not valid for this token"
-  //     })
-  //   }
     req.user = user
     // console.log("REQ USER",req.user);
     next()
