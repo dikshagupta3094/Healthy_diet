@@ -8,7 +8,7 @@ const app = express()
 const connectTodb = require('./db/connect.db.js')
 const errorMiddleware = require('./middleware/error.middleware.js')
 let corsOptions = {
-    origin: "http://",
+    origin: "http://localhost:5173",
     method: "GET,POST,PUT,PATCH,DELETE", 
     Credential:true
 }

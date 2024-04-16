@@ -22,19 +22,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-    },
-
-    confirmPassword:{
-      type:String
-    },
-    mobile_no: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
-    gender: {
-      required: true,
-      type: String,
+      trim:true
     },
     role: {
       type: String,
