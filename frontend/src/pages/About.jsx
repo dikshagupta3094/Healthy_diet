@@ -8,19 +8,19 @@ import "../styles/About.css"
 
 const About = () => {
     function myFunction() {
-        var dots = document.getElementById("dots");
-        var moreText = document.getElementById("more");
-        var btnText = document.getElementById("myBtn");
+        // var dots = document.getElementById("dots");
+        // var moreText = document.getElementById("more");
+        // var btnText = document.getElementById("myBtn");
       
-        if (dots.style.display === "none") {
-          dots.style.display = "inline";
-          btnText.innerHTML = "view more";
-          moreText.style.display = "none";
-        } else {
-          dots.style.display = "none";
-          btnText.innerHTML = "view less";
-          moreText.style.display = "inline";
-        }
+        // if (dots.style.display === "none") {
+        //   dots.style.display = "inline";
+        //   btnText.innerHTML = "View more";
+        //   moreText.style.display = "none";
+        // } else {
+        //   dots.style.display = "none";
+        //   btnText.innerHTML = "View less";
+        //   moreText.style.display = "inline";
+        // }
       }
     return (
     <>
@@ -46,7 +46,13 @@ const About = () => {
           },
         }}
       >
-        <Typography variant="h4" sx={{color:"#65B741", marginTop: 0}}>About <br />Diet Dynamo</Typography>
+        <Typography variant="h4" 
+        sx={{
+          color:"#65B741", 
+          marginTop: 0}}>
+            About <br />Diet Dynamo
+          </Typography>
+
         <div className='part1'>
             <img src={About1} className='about1' alt="" />
         <div className='wrapper'>
@@ -76,7 +82,10 @@ const About = () => {
                 distinctio illum sed debitis explicabo, autem cum tempora sit temporibus eligendi quod. 
                 Et aspernatur sint libero praesentium adipisci laudantium repellat quae inventore excepturi!
             </p>
-            <Button onClick={myFunction} sx={{bgcolor:"#65B741", color:"black"}}>View more</Button>
+            <Button variant="contained" 
+            onClick={() => {myFunction}} 
+            sx={{bgcolor:"#65B741"}}>
+              View More</Button>
         </div>
         
         </div>
@@ -98,9 +107,12 @@ const About = () => {
           saepe voluptatem commodi laudantium quibusdam repellat nobis libero at
           consectetur adipisci ipsa.
             </p>
-          
+            <Button variant="contained" 
+            onClick={() => {myFunction}} 
+            sx={{bgcolor:"#65B741"}}>
+              View More</Button>
         </div>
-            <img src={About2} className='about1' alt="" />
+            <img src={About2} className='about2' alt="" />
         
         </div>
       </Box>

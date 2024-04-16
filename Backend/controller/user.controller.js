@@ -6,8 +6,8 @@ const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 exports.register = async(req,res,next)=>{
    try {
-   const {name,username,email,password,confirmPassword,mobile_no,gender,role} = req.body
-      if(!name||!username||!email||!password||!mobile_no||!gender){
+   const {name,username,email,password,confirmPassword,role} = req.body
+      if(!name||!username||!email||!password){
          return next(new CustomError('All fields are required',400))
       }
       
@@ -25,8 +25,6 @@ exports.register = async(req,res,next)=>{
          username,
          email,
          password,
-         mobile_no,
-         gender,
          role,
          
       })

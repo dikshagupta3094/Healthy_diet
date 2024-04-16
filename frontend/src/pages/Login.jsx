@@ -34,7 +34,7 @@ const Login = () => {
             <Form.Item label="Password" name="password" >
                 <Input className='input' type='password' required />
             </Form.Item>
-            <Link>Forgot Password?</Link>
+            <Link to='/forgotpassword'>Forgot Password?</Link>
             <button className='btn btn-success' type="submit">Login</button>
 
             <p className='text-center mt-2'>Create an account. <Link to='/SignUp'>SignUp</Link></p>

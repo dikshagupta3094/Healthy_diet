@@ -27,15 +27,7 @@ const userSchema = new mongoose.Schema(
     confirmPassword:{
       type:String
     },
-    mobile_no: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
-    gender: {
-      required: true,
-      type: String,
-    },
+    
     role: {
       type: String,
       enum: ["user","Diet expert"],

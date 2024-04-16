@@ -1,14 +1,14 @@
 import { useState } from "react";
-import {AppBar , Box, Divider, Drawer, IconButton, Typography, Toolbar} from '@mui/material'
+import {AppBar , Box, Divider, Drawer, IconButton, Button, Typography, Toolbar} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from "react-router-dom";
 import '../styles/Header.css'
 import  Diet from "../assets/Diet.png";
-
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 const Header = () => {
-
+  // let user = JSON.parse(localStorage.getItem)
     const [mobileOpen, setMobileOpen] = useState(false);
     // hndle menu click
     const handleDrawerToggle = () => {
@@ -16,7 +16,7 @@ const Header = () => {
     };
     //menu drawer
     const drawer = (
-      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center"}}>
         <Typography
           color={"#65B741"}
           variant="h6"
@@ -37,10 +37,16 @@ const Header = () => {
           <NavLink to={"/about"}>About Us</NavLink>
         </li>
         <li>
-          <NavLink to={"/prices"}>Prices</NavLink>
+           <NavLink to={"/experts"}>Our Experts</NavLink>
         </li>
         <li>
-          <NavLink to={"/contact"}>Contact</NavLink>
+                <NavLink to={"/logout"}>
+                  <Button variant="outlined" size="small" color="error" 
+                   sx={{marginTop: "2px"}}>
+                    Logout
+                    <LogoutIcon/>
+                  </Button>
+                </NavLink>
         </li>
       </ul>
     </Box>);
@@ -48,19 +54,20 @@ const Header = () => {
   return (
     <>
     <Box>
-    <AppBar component={"nav"} sx={{ bgcolor: "black" }}>
+    <AppBar component={"nav"} sx={{ bgcolor: "white" }}>
           <Toolbar>
             <IconButton
-              color="black"
+              bgcolor="black"
               aria-label="open drawer"
               edge="start"
               sx={{
                 mr: 2,
-                display: { lg: "none" },
+                display: { sm: "none" },
+                fontSize: 30
               }}
               onClick={handleDrawerToggle}
             >
-              <MenuIcon color="black"/>
+              <MenuIcon/>
             </IconButton>
             <Typography
               color={"#65B741"}
@@ -82,10 +89,17 @@ const Header = () => {
                   <NavLink to={"/about"}>About Us</NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/prices"}>Prices</NavLink>
+                  <NavLink to={"/experts"}>Our Experts</NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/contact"}>Contact</NavLink>
+                <NavLink to={"/logout"}>
+                  <Button variant="outlined" size="small" color="error" 
+                   sx={{marginTop: "2px"}}>
+                    Logout
+                    <LogoutIcon/>
+                  </Button>
+                </NavLink>
+                  
                 </li>
               </ul>
             </Box>

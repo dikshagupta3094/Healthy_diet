@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import About from './pages/About';
+import OurExpert from './pages/OurExpert';
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
       <Route path="/login" element={<Login/>} />
       <Route path="/signup" element={<SignUp/>} />
       <Route path="/about" element={<About/>}/>
+      <Route path="/experts" element={<OurExpert/>}/>
     </Routes>
     </BrowserRouter>
     </>
