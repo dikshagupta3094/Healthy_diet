@@ -6,14 +6,15 @@ const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 exports.register = async(req,res,next)=>{
    try {
+<<<<<<< HEAD
    const {name,username,email,password,confirmPassword,role} = req.body
+=======
+   const {name,username,email,password,role} = req.body
+>>>>>>> d29de792e7b305676811f6faff6e74ade0ce35e1
       if(!name||!username||!email||!password){
          return next(new CustomError('All fields are required',400))
       }
       
-      if(password != confirmPassword){
-         return next(new CustomError('Password do not match',400))
-      }
       const userExist = await user_model.findOne({email})
 
       if(userExist){
@@ -25,8 +26,12 @@ exports.register = async(req,res,next)=>{
          username,
          email,
          password,
+<<<<<<< HEAD
          role,
          
+=======
+         role,  
+>>>>>>> d29de792e7b305676811f6faff6e74ade0ce35e1
       })
       if(!user){
          return next(new CustomError('User registration failed',500))
