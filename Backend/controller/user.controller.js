@@ -4,13 +4,21 @@ const CustomError = require('../utilis/customError.utilis.js')
 const sendEmail = require('../utilis/sendEmail.utilis.js')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
+const validator = require('validator')
+
+
+//FORNTEND URL
+const BASE_URL = process.env.BASE_URL
+
 exports.register = async(req,res,next)=>{
    try {
    const {name,username,email,password,role} = req.body
       if(!name||!username||!email||!password){
          return next(new CustomError('All fields are required',400))
       }
-      
+      if(validator.isStrongPassword(password)){
+         return next(new CustomError('Password must be a strong'))
+      }
       const userExist = await user_model.findOne({email})
 
       if(userExist){
@@ -22,7 +30,7 @@ exports.register = async(req,res,next)=>{
          username,
          email,
          password,
-         role,  
+         role, 
       })
       if(!user){
          return next(new CustomError('User registration failed',500))
@@ -101,7 +109,6 @@ exports.forgotPassword = async(req,res,next)=>{
   await user.save()
   console.log("Reset token:", resetToken);
   //SEND THE TOKEN BACK TO THE USER EMAIL
-   const BASE_URL = process.env.BASE_URL
    console.log("BASE URL", BASE_URL);
    const resetURL = `${BASE_URL}/resetPassword/${resetToken}`
   console.log("Reset URL LINK:",resetURL);
