@@ -101,7 +101,9 @@ exports.forgotPassword = async(req,res,next)=>{
   await user.save()
   console.log("Reset token:", resetToken);
   //SEND THE TOKEN BACK TO THE USER EMAIL
-  const resetURL = `${req.protocol}://${req.get('host')}/api/auth/resetPassword/${resetToken}`;
+   const BASE_URL = process.env.BASE_URL
+   console.log("BASE URL", BASE_URL);
+   const resetURL = `${BASE_URL}/resetPassword/${resetToken}`
   console.log("Reset URL LINK:",resetURL);
   const message = `we have recived reset password request. please use below link to reset your password\n\n${resetURL}\n\n This link valid only for 2 minutes.`
   console.log("Message:",message);

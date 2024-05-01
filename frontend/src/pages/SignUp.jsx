@@ -14,11 +14,10 @@ const SignUp = () => {
     password:"",
     role:""
   })
+
   const navigate = useNavigate();
 
-
   const onfinishHandler = async (formData) => {
-    console.log(formData);
     try {
       let response = await fetch('http://localhost:8000/api/auth/register',{
         method: 'POST',
@@ -26,7 +25,12 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       })
       response = await response.json()
-      if(response){
+      console.log("Response", response);
+    if(response.message==='Account already created with associated data'){
+      message.error('Already have account,Not need to register again Please move to login')
+     
+    }
+    else if(response){
         message.success("Successfully register")
         navigate('/Login')
       }
@@ -51,17 +55,17 @@ const SignUp = () => {
             <Form.Item label="Name" name="name" >
                 <Input type='text' required value={formData.name} onChange = {(e)=>setFormData({...formData,name:e.target.value})}/>
             </Form.Item>
-            <Form.Item label="Username" name="username" value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})}>
-                <Input type='text' required / >
+            <Form.Item label="Username" name="username">
+                <Input type='text' required  value = {formData.username} onChange = {(e)=>setFormData({...formData,username:e.target.value})}/ >
             </Form.Item>
-            <Form.Item label="Email" name="email" value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})} >
-                <Input type='email' required  />
+            <Form.Item label="Email" name="email">
+                <Input type='email' required  value = {formData.email} onChange = {(e)=>setFormData({...formData,email:e.target.value})} />
             </Form.Item>
-            <Form.Item label="Password" name="password"  value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})}>
-                <Input type='password' required  />
+            <Form.Item label="Password" name="password">
+                <Input type='password' required  value = {formData.password} onChange = {(e)=>setFormData({...formData,password:e.target.value})}/>
             </Form.Item>
-            <Form.Item label="Select Role" name="role"  value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})} >
-            <Radio.Group name="radiogroup_role" defaultValue={1}>
+            <Form.Item label="Select Role" name="role" >
+            <Radio.Group name="radiogroup_role"  value = {formData.role} onChange = {(e)=>setFormData({...formData,role:e.target.value})} initalValues={1}>
                   <Radio className="radio-btn" value="user">User</Radio>
                   <Radio className="radio-btn" value="Diet expert">Diet Expert</Radio>
                 </Radio.Group>

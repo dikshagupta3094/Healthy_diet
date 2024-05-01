@@ -8,7 +8,7 @@ const postQuerySchema = new mongoose.Schema({
     },
     expertId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
+        ref:'user',
         default:null
     },
     content:{
