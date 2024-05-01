@@ -4,8 +4,6 @@ const CustomError = require('../utilis/customError.utilis.js')
 const sendEmail = require('../utilis/sendEmail.utilis.js')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
-const validator = require('validator')
-
 
 //FORNTEND URL
 const BASE_URL = process.env.BASE_URL
@@ -15,9 +13,6 @@ exports.register = async(req,res,next)=>{
    const {name,username,email,password,role} = req.body
       if(!name||!username||!email||!password){
          return next(new CustomError('All fields are required',400))
-      }
-      if(validator.isStrongPassword(password)){
-         return next(new CustomError('Password must be a strong'))
       }
       const userExist = await user_model.findOne({email})
 
