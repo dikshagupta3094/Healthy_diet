@@ -3,9 +3,10 @@
     display: flex;
     margin: 3em auto;
 }
-.about1{
+.about1, .about2{
     width: 616px;
     height: 414px;
+    float: left;
 }
 
 .part2{
@@ -14,10 +15,11 @@
 }
 
 .wrapper{
-    float: left;
    text-align: left;
    margin: 0 25px;
 }
+
+
 
 #more {
     display: none;

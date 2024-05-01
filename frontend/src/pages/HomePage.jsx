@@ -93,6 +93,12 @@ const HomePage = () => {
     </Card>
     </Box>
 
+    <Box>
+      <Typography variant="h5">Calculate Your Body Mass Index</Typography>
+      <Box>
+        <Typography variant="h6">BMI Calculator</Typography>
+      </Box>
+    </Box>
 
     </Layout>
     </>
