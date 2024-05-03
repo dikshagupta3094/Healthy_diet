@@ -26,9 +26,9 @@ const SignUp = () => {
       })
       response = await response.json()
       console.log("Response", response);
+      
     if(response.message==='Account already created with associated data'){
       message.error('Already have account,Not need to register again Please move to login')
-     
     }
     else if(response){
         message.success("Successfully register")

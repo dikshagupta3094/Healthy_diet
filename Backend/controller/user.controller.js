@@ -59,12 +59,14 @@ exports.login = async(req,res,next)=>{
          return next(new CustomError("Email and password does not match",400))
       }
       const token = user.jsonwebtoken()
+      console.log("Token Generated",token);
        user.password = undefined
       res.cookie('token',token,cookieOption)
       res.status(200).json({
          success:true,
          msg:"LogIn successfully",
-         data:user
+         data:user,
+         token:token
       })
    }
 
@@ -77,7 +79,6 @@ exports.login = async(req,res,next)=>{
 exports.logout = (req,res,next)=>{
  try {
    res.cookie('token',null,{
-      secure:true,
       maxAge:0,
       httpOnly:true
     })

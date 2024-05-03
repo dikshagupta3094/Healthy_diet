@@ -18,8 +18,10 @@ const [formData,setFormData] = useState({
         body: JSON.stringify(formData),
       })
       response = await response.json()
-      if(response){
-        localStorage.setItem("token",response.data.token)
+      if(response.message==='Email and password does not match'){
+        message.error('Invalid Email and password')
+      }
+     else if(response){
         message.success('Successfully Logged In!')
         navigate('/')
       }else{

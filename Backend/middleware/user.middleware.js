@@ -20,8 +20,10 @@ const verifyToken = async(req,res,next)=>{
   }
 
   const user =await  jwt.verify(token,process.env.SECRET)
+    req.token = token
     req.user = user
-    // console.log("REQ USER",req.user);
+    console.log("REQ USER",req.user);
+    console.log("REQ TOKEN",req.token);
     next()
 
  
