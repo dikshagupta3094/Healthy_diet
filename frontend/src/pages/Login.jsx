@@ -2,7 +2,6 @@ import  { useState } from 'react'
 import { Form, Input, message } from 'antd';
 import {Link, useNavigate} from 'react-router-dom'
 import '../styles/Login.css'
-// import { useForm } from 'antd/es/form/Form';
 
 const Login = () => {
 
@@ -19,8 +18,10 @@ const [formData,setFormData] = useState({
         body: JSON.stringify(formData),
       })
       response = await response.json()
-      if(response){
-        localStorage.setItem("token",response.data.token)
+      if(response.message==='Email and password does not match'){
+        message.error('Invalid Email and password')
+      }
+     else if(response){
         message.success('Successfully Logged In!')
         navigate('/')
       }else{
@@ -40,10 +41,10 @@ const [formData,setFormData] = useState({
       <Form.Item label="Email" name="email" >
                 <Input className='input' type='email' required value={formData.email} onChange={(e)=>setFormData(e.target.value)} />
             </Form.Item>
-            <Form.Item label="Password" name="password" value={formData.password} onChange={(e)=>setFormData(e.target.value)}>
-                <Input className='input' type='password' required />
+            <Form.Item label="Password" name="password">
+                <Input className='input' type='password' required value={formData.password} onChange={(e)=>setFormData(e.target.value)}/>
             </Form.Item>
-            <Link to='/forgotPassword'>Forgot Password?</Link>
+            <Link to='/forgotpassword'>Forgot Password?</Link>
             <button className='btn btn-success' type="submit">Login</button>
 
             <p className='text-center mt-2'>Create an account. <Link to='/signup'>SignUp</Link></p>

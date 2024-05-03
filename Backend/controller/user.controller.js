@@ -4,13 +4,16 @@ const CustomError = require('../utilis/customError.utilis.js')
 const sendEmail = require('../utilis/sendEmail.utilis.js')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
+
+//FORNTEND URL
+const BASE_URL = process.env.BASE_URL
+
 exports.register = async(req,res,next)=>{
    try {
    const {name,username,email,password,role} = req.body
       if(!name||!username||!email||!password){
          return next(new CustomError('All fields are required',400))
       }
-      
       const userExist = await user_model.findOne({email})
 
       if(userExist){
@@ -22,7 +25,7 @@ exports.register = async(req,res,next)=>{
          username,
          email,
          password,
-         role,  
+         role, 
       })
       if(!user){
          return next(new CustomError('User registration failed',500))
@@ -56,12 +59,14 @@ exports.login = async(req,res,next)=>{
          return next(new CustomError("Email and password does not match",400))
       }
       const token = user.jsonwebtoken()
+      console.log("Token Generated",token);
        user.password = undefined
       res.cookie('token',token,cookieOption)
       res.status(200).json({
          success:true,
          msg:"LogIn successfully",
-         data:user
+         data:user,
+         token:token
       })
    }
 
@@ -74,7 +79,6 @@ exports.login = async(req,res,next)=>{
 exports.logout = (req,res,next)=>{
  try {
    res.cookie('token',null,{
-      secure:true,
       maxAge:0,
       httpOnly:true
     })
@@ -101,7 +105,8 @@ exports.forgotPassword = async(req,res,next)=>{
   await user.save()
   console.log("Reset token:", resetToken);
   //SEND THE TOKEN BACK TO THE USER EMAIL
-  const resetURL = `${req.protocol}://${req.get('host')}/api/auth/resetPassword/${resetToken}`;
+   console.log("BASE URL", BASE_URL);
+   const resetURL = `${BASE_URL}/resetPassword/${resetToken}`
   console.log("Reset URL LINK:",resetURL);
   const message = `we have recived reset password request. please use below link to reset your password\n\n${resetURL}\n\n This link valid only for 2 minutes.`
   console.log("Message:",message);

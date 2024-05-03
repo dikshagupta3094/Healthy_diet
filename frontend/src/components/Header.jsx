@@ -6,7 +6,6 @@ import '../styles/Header.css'
 import  Diet from "../assets/Diet.png";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-
 const Header = () => {
   // let user = JSON.parse(localStorage.getItem)
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,7 +28,8 @@ const Header = () => {
         <Divider />
         <ul className="mobile-navigation">
         <li>
-          <NavLink activeClassName="active" to={"/"}>
+          {/* <NavLink activeClassName="active" to={"/"}> */}
+          <NavLink className="active" to={"/"}>
             Home
             
           </NavLink>
@@ -82,7 +82,8 @@ const Header = () => {
             <Box sx={{ display: { xs: "none", sm: "block" }, marginRight:"40px" }}>
               <ul className="navigation-menu">
                 <li>
-                  <NavLink activeClassName="active" to={"/"}>
+                  {/* <NavLink activeClassName="active" to={"/"}> */}
+                  <NavLink className="active" to={"/"}> 
                     Home
                   </NavLink>
                 </li>
@@ -97,10 +98,9 @@ const Header = () => {
                   <Button variant="outlined" size="small" color="error" 
                    sx={{marginTop: "2px"}}>
                     Logout
-                    <LogoutIcon/>
+                   <LogoutIcon/>
                   </Button>
                 </NavLink>
-                  
                 </li>
               </ul>
             </Box>
