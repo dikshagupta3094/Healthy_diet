@@ -4,12 +4,10 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import About from './pages/About';
-<<<<<<< HEAD
 import OurExpert from './pages/OurExpert';
-
-=======
-import ForgotPassword from './pages/ForgotPassword'
->>>>>>> d29de792e7b305676811f6faff6e74ade0ce35e1
+import ForgotPassword from './pages/ForgotPassword';
+import ContactUs from './pages/Contact';
+import PageNotFound from './pages/PageNotFound';
 function App() {
   
 
@@ -22,8 +20,10 @@ function App() {
       <Route path="/login" element={<Login/>} />
       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
       <Route path="/signup" element={<SignUp/>} />
-      <Route path="/about" element={<About/>}/>
+      <Route path="/about" element={<About/>}/> 
       <Route path="/experts" element={<OurExpert/>}/>
+      <Route path="/contact" element={<ContactUs/>}/>
+      <Route path="*" element={< PageNotFound/>}/>
     </Routes>
     </BrowserRouter>
     </>

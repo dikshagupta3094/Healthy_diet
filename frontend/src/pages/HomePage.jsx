@@ -1,4 +1,5 @@
 // import React from 'react'
+import { useState } from 'react'; 
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import Card from '@mui/material/Card';
@@ -9,13 +10,47 @@ import Banner from '../assets/Banner.jpg'
 import Nutritionist from "../assets/Nutritionist.png"
 import Dietitian from '../assets/Dietitian.png'
 import Synergy from '../assets/Synergy.png'
+import BMI from "../assets/bmi.jpg"
+
+
 const HomePage = () => {
+
+
+  const [heightValue, setHeightValue] = useState(''); 
+  const [weightValue, setWeightValue] = useState(''); 
+  const [bmiValue, setBmiValue] = useState(''); 
+  const [bmiMessage, setBmiMessage] = useState(''); 
+
+  const calculateBmi = () => { 
+      if (heightValue && weightValue) { 
+          const heightInMeters = heightValue / 100; 
+          const bmi = (weightValue / (heightInMeters * heightInMeters)).toFixed(2); 
+          setBmiValue(bmi); 
+
+          let message = ''; 
+          if (bmi < 18.5) { 
+              message = 'You are Underweight'; 
+          } else if (bmi >= 18.5 && bmi < 25) { 
+              message = 'You are Normal weight'; 
+          } else if (bmi >= 25 && bmi < 30) { 
+              message = 'You are Overweight'; 
+          } else { 
+              message = 'You are Obese'; 
+          } 
+          setBmiMessage(message); 
+      } else { 
+          setBmiValue(''); 
+          setBmiMessage(''); 
+      } 
+  }; 
+
+
   return (
     <>
     <Layout>
       <div className="home" style={{ backgroundImage: `url(${Banner})` }}>
         <div className="headerContainer">
-          <span>Welcome to Diet Dynamo</span><br />
+          <div className='welcome'>Welcome to Diet Dynamo</div><br />
           <h1>Nourish your body,<br /> love your life.</h1>
           <p>Fuel your body with healthy choices and experience sustained energy <br />
            for a life brimming with vitality.</p>
@@ -93,10 +128,52 @@ const HomePage = () => {
     </Card>
     </Box>
 
-    <Box>
-      <Typography variant="h5">Calculate Your Body Mass Index</Typography>
-      <Box>
-        <Typography variant="h6">BMI Calculator</Typography>
+    <Box bgcolor={'#EEF5FF'} paddingBottom={10} marginY={12}>
+      <Typography variant="h4" sx={{
+        textAlign:'center', 
+        fontStyle:'italic', 
+        color:"#7C93C3", 
+        paddingTop:"5rem",
+        fontWeight:700
+        }}>Calculate Your Body Mass Index</Typography>
+      <Box sx={{display:"flex", justifyContent:"center" ,marginY:"50px"}}>
+      <div className="bmi"> 
+            <h3>BMI Calculator</h3> 
+            <div className="input-container"> 
+                <label htmlFor="height">Enter Your Height (cm):</label> <br />
+                <input 
+                    type="number"
+                    id="height"
+                    value={heightValue} 
+                    onChange={(e) => setHeightValue(e.target.value)} 
+                /> 
+            </div> 
+            <div className="input-container"> 
+                <label htmlFor="weight">Enter Your Weight (kg):</label> <br />
+                <input 
+                    type="number"
+                    id="weight"
+                    value={weightValue} 
+                    onChange={(e) => setWeightValue(e.target.value)} 
+                /> 
+            </div> 
+            <button className="calculate-btn" onClick={calculateBmi}> 
+                Click to Calculate BMI 
+            </button> 
+            {bmiValue && bmiMessage && ( 
+              <div className="result"> 
+                    <p> 
+                        Your BMI: <span className="bmi-value">{bmiValue}</span> 
+                    </p> 
+                    <p> 
+                        Result: <span className="bmi-message">{bmiMessage}</span> 
+                    </p> 
+                </div> 
+            )} 
+        </div> 
+      <div className='bmi-image'>
+         <img src={BMI} alt="measurement" width={250} height={250}/>
+        </div>
       </Box>
     </Box>
 

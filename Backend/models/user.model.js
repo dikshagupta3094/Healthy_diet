@@ -22,17 +22,8 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-<<<<<<< HEAD
-    },
-
-    confirmPassword:{
-      type:String
-    },
-    
-=======
       trim:true
     },
->>>>>>> d29de792e7b305676811f6faff6e74ade0ce35e1
     role: {
       type: String,
       enum: ["user","Diet expert"],

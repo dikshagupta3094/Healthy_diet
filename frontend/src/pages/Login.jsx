@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Form, Input, message } from 'antd';
 import {Link, useNavigate} from 'react-router-dom'
 import '../styles/Login.css'
-import { useForm } from 'antd/es/form/Form';
+// import { useForm } from 'antd/es/form/Form';
 
 const Login = () => {
 
@@ -43,14 +43,10 @@ const [formData,setFormData] = useState({
             <Form.Item label="Password" name="password" value={formData.password} onChange={(e)=>setFormData(e.target.value)}>
                 <Input className='input' type='password' required />
             </Form.Item>
-<<<<<<< HEAD
-            <Link to='/forgotpassword'>Forgot Password?</Link>
-=======
             <Link to='/forgotPassword'>Forgot Password?</Link>
->>>>>>> d29de792e7b305676811f6faff6e74ade0ce35e1
             <button className='btn btn-success' type="submit">Login</button>
 
-            <p className='text-center mt-2'>Create an account. <Link to='/SignUp'>SignUp</Link></p>
+            <p className='text-center mt-2'>Create an account. <Link to='/signup'>SignUp</Link></p>
       </Form>
     </div>
     

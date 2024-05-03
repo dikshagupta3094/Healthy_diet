@@ -2,7 +2,7 @@
 // import React from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import Whatsapp from "@mui/icons-material/WhatsApp";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Box, Typography } from "@mui/material";
 const Footer = () => {
@@ -29,7 +29,7 @@ const Footer = () => {
           {/* icons */}
           <InstagramIcon />
           <TwitterIcon />
-          <GitHubIcon />
+          <Whatsapp />
           <YouTubeIcon />
         </Box>
         <Typography

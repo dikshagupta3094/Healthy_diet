@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Form, Input, Radio, message} from 'antd';
 import '../styles/SignUp.css'
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ import { useState } from 'react';
 //       <div className="form-container sign-up-container">
 //         <form action="#">
 //           <h1>Create account</h1>
-      
+
 //           <input type="text" placeholder="Name" /><br/>
 //           <input type="text" placeholder="Username" /><br/>
 //           <input type="email" placeholder="Email address" /><br/>
@@ -36,20 +36,29 @@ import { useState } from 'react';
 //         </form>
 //       </div>
 
-<<<<<<< HEAD
-//     </div>
-//   </>
-//   )
-// }
+
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+// import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const SignUp = () => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState({
-    name:"",
-    username:"",
-    email:"",
-    password:"",
-    role:""
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    role: ""
   })
   const navigate = useNavigate();
 
@@ -57,65 +66,63 @@ const SignUp = () => {
   const onfinishHandler = async (formData) => {
     console.log(formData);
     try {
-      let response = await fetch('http://localhost:8000/api/auth/register',{
+      let response = await fetch('http://localhost:8000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
       response = await response.json()
-      if(response){
+      if (response) {
         message.success("Successfully register")
         navigate('/Login')
       }
-      else{
+      else {
         message.error(response.data.message);
       }
     } catch (error) {
       console.log(error);
       message.error('Something went wrong!!')
     }
-    
+
   };
 
 
-        <Form form={form} layout='horizontal' onFinish={onfinishHandler} 
-        className='signup-form'>
+  <Form form={form} layout='horizontal' onFinish={onfinishHandler}
+    className='signup-form'>
 
-            <h3 className="text-center pb-2">SignUp</h3>
-            <Form.Item label="Name" name="name" >
-                <Input type='text' required value={formData.name} onChange = {(e)=>setFormData({...formData,name:e.target.value})}/>
-            </Form.Item>
-            <Form.Item label="Username" name="username" value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})}>
-                <Input type='text' required / >
-            </Form.Item>
-            <Form.Item label="Email" name="email" value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})} >
-                <Input type='email' required  />
-            </Form.Item>
-            <Form.Item label="Password" name="password"  value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})}>
-                <Input type='password' required  />
-            </Form.Item>
-            <Form.Item label="Select Role" name="role"  value = {formData.username} onChange = {(e)=>setFormData({...formData,name:e.target.value})} >
-            <Radio.Group name="radiogroup_role" defaultValue={1}>
-                  <Radio className="radio-btn" value="user">User</Radio>
-                  <Radio className="radio-btn" value="Diet expert">Diet Expert</Radio>
-                </Radio.Group>
-            </Form.Item>
+    <h3 className="text-center pb-2">SignUp</h3>
+    <Form.Item label="Name" name="name" >
+      <Input type='text' required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+    </Form.Item>
+    <Form.Item label="Username" name="username" value={formData.username} onChange={(e) => setFormData({ ...formData, name: e.target.value })}>
+      <Input type='text' required />
+    </Form.Item>
+    <Form.Item label="Email" name="email" value={formData.username} onChange={(e) => setFormData({ ...formData, name: e.target.value })} >
+      <Input type='email' required />
+    </Form.Item>
+    <Form.Item label="Password" name="password" value={formData.username} onChange={(e) => setFormData({ ...formData, name: e.target.value })}>
+      <Input type='password' required />
+    </Form.Item>
+    <Form.Item label="Select Role" name="role" value={formData.username} onChange={(e) => setFormData({ ...formData, name: e.target.value })} >
+      <Radio.Group name="radiogroup_role" defaultValue={1}>
+        <Radio className="radio-btn" value="user">User</Radio>
+        <Radio className="radio-btn" value="Diet expert">Diet Expert</Radio>
+      </Radio.Group>
+    </Form.Item>
 
-            <button className='btn btn-success' type="submit">SignUp</button>
+    <button className='btn btn-success' type="submit">SignUp</button>
 
-            <p className='text-center mt-2'>Already have an account? <Link to='/Login'>Login</Link></p>
-        </Form>
-    </div>
-    </>
-  )
->>>>>>> d29de792e7b305676811f6faff6e74ade0ce35e1
+    <p className='text-center mt-2'>Already have an account? <Link to='/Login'>Login</Link></p>
+  </Form>
+    
+  
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
+function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -204,7 +211,7 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              {/* <Copy sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
         </Grid>
@@ -212,3 +219,5 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
+
+export default SignUp;
