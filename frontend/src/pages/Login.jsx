@@ -2,6 +2,7 @@ import  { useState } from 'react'
 import { Form, Input, message } from 'antd';
 import {Link, useNavigate} from 'react-router-dom'
 import '../styles/Login.css'
+import { AuthContext, useAuth } from '../store/Auth';
 
 const Login = () => {
 
@@ -9,19 +10,35 @@ const [formData,setFormData] = useState({
   email:"",
   password:"",
 })
+
   const navigate = useNavigate();
+  const [isLoggedIn,setisLoggedIn] = useState('false')
   const onfinishHandler = async (formData) => {
     try {
       let response = await fetch('http://localhost:8000/api/auth/login',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
+       
       })
       response = await response.json()
+      console.log("Response",response);
       if(response.message==='Email and password does not match'){
+        
         message.error('Invalid Email and password')
       }
      else if(response){
+      // setisLoggedIn({
+      //   ...isLoggedIn, 
+      //   user: response.user,
+      //   token: response.token,
+      // });
+      // localStorage.setItem(
+      //   "isLoggedIn",
+      //   JSON.stringify({ user: response.user, token: response.token })
+      // );
+        localStorage.setItem('token',response.token)
+        setisLoggedIn(true)
         message.success('Successfully Logged In!')
         navigate('/')
       }else{

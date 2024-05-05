@@ -4,6 +4,7 @@ const CustomError = require('../utilis/customError.utilis.js')
 const sendEmail = require('../utilis/sendEmail.utilis.js')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 //FORNTEND URL
 const BASE_URL = process.env.BASE_URL
@@ -46,11 +47,6 @@ exports.register = async(req,res,next)=>{
      
    }
 }
-
-const cookieOption ={
-   maxAge:24*60*60*1000,
-   httpOnly:true
-} 
 exports.login = async(req,res,next)=>{
    try {
       const {email,password} = req.body
@@ -61,7 +57,6 @@ exports.login = async(req,res,next)=>{
       const token = user.jsonwebtoken()
       console.log("Token Generated",token);
        user.password = undefined
-      res.cookie('token',token,cookieOption)
       res.status(200).json({
          success:true,
          msg:"LogIn successfully",
@@ -74,21 +69,6 @@ exports.login = async(req,res,next)=>{
       console.log(error);
      return next(new CustomError("Error while login",401))
    }
-}
-
-exports.logout = (req,res,next)=>{
- try {
-   res.cookie('token',null,{
-      maxAge:0,
-      httpOnly:true
-    })
-    res.status(200).json({
-      success:true,
-      message:"User logged out successfully"
-    })
- } catch (error) {
-    res.next(new CustomError('Please try again',500))
- }
 }
 
 exports.forgotPassword = async(req,res,next)=>{

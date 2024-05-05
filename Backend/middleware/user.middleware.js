@@ -1,7 +1,7 @@
 const validator = require('email-validator')
 const jwt = require('jsonwebtoken')
 const CustomError = require('../utilis/customError.utilis.js')
-
+const user_model = require('../models/user.model.js')
 const registerValidtion = (req,res,next)=>{
   const isValidEmail = validator.validate(req.body.email)
   if(!isValidEmail){
@@ -14,19 +14,16 @@ const registerValidtion = (req,res,next)=>{
 }
 
 const verifyToken = async(req,res,next)=>{
-  const {token} = req.cookies
+  const token = req.headers['x-access-token']
   if(!token){
     return next(new CustomError("Unauthenticated user",401))
   }
-
-  const user =await  jwt.verify(token,process.env.SECRET)
+  const user = jwt.verify(token,process.env.SECRET)
     req.token = token
     req.user = user
-    console.log("REQ USER",req.user);
+    console.log("REQ USER",await req.user);
     console.log("REQ TOKEN",req.token);
     next()
-
- 
 }
 //at this middleware this req will have this user property
 const postQueryValidation =(role)=>{

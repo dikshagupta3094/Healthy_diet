@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import {AppBar , Box, Divider, Drawer, IconButton, Button, Typography, Toolbar} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from "react-router-dom";
@@ -7,6 +7,8 @@ import  Diet from "../assets/Diet.png";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = () => {
+
+ 
   // let user = JSON.parse(localStorage.getItem)
     const [mobileOpen, setMobileOpen] = useState(false);
     // hndle menu click
@@ -93,7 +95,7 @@ const Header = () => {
                 <li>
                   <NavLink to={"/experts"}>Our Experts</NavLink>
                 </li>
-                <li>
+               <li>
                 <NavLink to={"/logout"}>
                   <Button variant="outlined" size="small" color="error" 
                    sx={{marginTop: "2px"}}>
@@ -101,7 +103,18 @@ const Header = () => {
                    <LogoutIcon/>
                   </Button>
                 </NavLink>
+                </li> 
+                 <li>
+                <NavLink to={"/login"}>
+                  <Button variant="outlined" size="small" color="error" 
+                   sx={{marginTop: "2px"}}>
+                    Login
+                   {/* <LogoutIcon/> */}
+                  </Button>
+                </NavLink>
                 </li>
+                
+               
               </ul>
             </Box>
           </Toolbar>
