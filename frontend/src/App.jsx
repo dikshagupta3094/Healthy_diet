@@ -10,6 +10,7 @@ import PageNotFound from './pages/PageNotFound';
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import Logout from './pages/Logout'
+import PostQuery from './pages/PostQuery';
 function App() {
   
 
@@ -27,6 +28,7 @@ function App() {
       <Route path="/experts" element={<OurExpert/>}/>
       <Route path="/contact" element={<ContactUs/>}/>
       <Route path="/Logout" element={<Logout/>}/>
+      <Route path="/postQuery" element={<PostQuery/>}/>
       <Route path="*" element={< PageNotFound/>}/>
     </Routes>
     </BrowserRouter>
