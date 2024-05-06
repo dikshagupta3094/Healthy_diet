@@ -1,7 +1,12 @@
 import React from 'react'
 import { Typography } from '@mui/material'
-
+import { useNavigate } from 'react-router-dom'
 const PostQuery = () => {
+    const navigate = useNavigate()
+    const handleSubmit = ()=>{
+        alert("Query submitted successfully")
+        navigate('/')
+    }
   return (
     <>
     <Typography variant='h3' textAlign={'center'} >
@@ -24,11 +29,9 @@ const PostQuery = () => {
         </div>
         <div>
             <label htmlFor="name">Your Query :</label> <br />
-            <textarea type="text" name="name" id= "" placeholder='Please write your query here..' />
+            <textarea type="text" name="name" id="" placeholder='Please write your query here..' required/>
         </div>
-        <div>
-            <button type="submit">Submit</button>
-        </div>
+        <button onClick={handleSubmit}>Submit</button>
     </div>
     </>
   )
