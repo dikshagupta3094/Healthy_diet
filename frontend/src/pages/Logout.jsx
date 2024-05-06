@@ -1,8 +1,10 @@
-import {React,useEffect} from 'react'
+import {React,useEffect, useState} from 'react'
 import {Navigate} from 'react-router-dom'
 import {message } from 'antd';
-import cookies from 'js-cookie'
+
+
 const Logout = ()=>{
+    const [auth,setAuth] = useState(false)
     // const navigate = useNavigate()
     //  useEffect(()=>{
     //     // fetch('http://localhost:8000/api/auth/logout',{
@@ -16,14 +18,24 @@ const Logout = ()=>{
     //       //   message.success('Logged out successfully')
     //       //   Navigate('/login')
     //       // }
-    //       localStorage.rzzzzzzz
+    //      
     //     }).catch((error)=>{
     //       console.log("ERROR",error);
     //       message.error("Something went wrong")
     //     })
     //  })
     useEffect(()=>{
-       localStorage.removeItem('token')
+        setAuth({
+            ...auth, 
+            Id: "",
+            token: "",
+          });
+          localStorage.removeItem(
+            "auth",
+           
+          );
+    //    localStorage.removeItem('token')
+      setAuth(false)
        message.success('Logged out successfully')
     },[])
     return <Navigate to={'/login'}/>

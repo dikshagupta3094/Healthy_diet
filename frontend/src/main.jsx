@@ -7,9 +7,10 @@ import { AuthProvider } from './store/Auth.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <AuthProvider>
+ 
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  </AuthProvider>
+  </React.StrictMode>
+  
+
 )

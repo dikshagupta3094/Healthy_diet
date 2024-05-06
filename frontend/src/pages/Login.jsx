@@ -1,8 +1,8 @@
 import  { useState } from 'react'
 import { Form, Input, message } from 'antd';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, json, useNavigate} from 'react-router-dom'
 import '../styles/Login.css'
-import { AuthContext, useAuth } from '../store/Auth';
+
 
 const Login = () => {
 
@@ -12,7 +12,7 @@ const [formData,setFormData] = useState({
 })
 
   const navigate = useNavigate();
-  const [isLoggedIn,setisLoggedIn] = useState('false')
+  const [auth,setAuth] = useState(false)
   const onfinishHandler = async (formData) => {
     try {
       let response = await fetch('http://localhost:8000/api/auth/login',{
@@ -24,21 +24,23 @@ const [formData,setFormData] = useState({
       response = await response.json()
       console.log("Response",response);
       if(response.message==='Email and password does not match'){
-        
         message.error('Invalid Email and password')
       }
      else if(response){
-      // setisLoggedIn({
-      //   ...isLoggedIn, 
-      //   user: response.user,
-      //   token: response.token,
-      // });
-      // localStorage.setItem(
-      //   "isLoggedIn",
-      //   JSON.stringify({ user: response.user, token: response.token })
-      // );
-        localStorage.setItem('token',response.token)
-        setisLoggedIn(true)
+      setAuth({
+        ...auth, 
+        Id: response.data._id,
+        token: response.token,
+      });
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({  Id: response.data._id, token: response.token })
+      );
+      console.log("Id",response.data._id);
+        // localStorage.setItem(JSON.stringify({'token':response.token,'Id':response.data._id}))
+      //  -----
+        setAuth(true)
+        // ----
         message.success('Successfully Logged In!')
         navigate('/')
       }else{

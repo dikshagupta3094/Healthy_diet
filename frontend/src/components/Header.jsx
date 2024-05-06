@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import '../styles/Header.css'
 import  Diet from "../assets/Diet.png";
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
 const Header = () => {
 
  
@@ -113,7 +113,10 @@ const Header = () => {
                   </Button>
                 </NavLink>
                 </li>
-                
+                <li>
+                  
+                  <NotificationsIcon className="notification"/>
+                </li>
                
               </ul>
             </Box>

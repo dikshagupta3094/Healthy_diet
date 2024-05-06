@@ -4,36 +4,22 @@ export const AuthContext = createContext()
 
 export const AuthProvider = ({Children})=>{
    
-    const[isLoggedIn,setisLoggedIn] = useState(false)
-
-    // useEffect(() => {
-    //     const data = localStorage.getItem('token');
-    //       console.log("Data",data);
-    //     if (data) {
-    //     //   const ParseData = JSON.parse(data);
-    //     //   console.log(ParseData.user,ParseData.token);
-    //     //   setisLoggedIn({
-    //     //     ...isLoggedIn,
-    //     //     isLoggedIn: ParseData.user,
-    //     //     token: ParseData.token,
-    //     //   });
-    //     setisLoggedIn(true)
-    //     }
-    //   }, []);
-    
-    // const storeTokenInLS = (serverToken)=>{
-    //   return localStorage.setItem('token',serverToken)
-    // }
+    const[auth,setAuth] = useState({
+        Id:null,
+        token:""
+    })
     useEffect(()=>{
-    const data = localStorage.getItem('token')
-    if(data){
-        setisLoggedIn(true)
-    }
-    else{
-        setisLoggedIn(false)
-    }
+        const data = localStorage.getItem('auth')
+        if(data){
+            const ParseData = JSON.parse(data)
+            setAuth({
+                ...auth,
+                Id:ParseData.Id,
+                token:ParseData.token
+            })
+        }
     },[])
-   return <AuthContext.Provider value={[isLoggedIn,setisLoggedIn]}>
+   return <AuthContext.Provider value={[auth,setAuth]}>
     {Children}
    </AuthContext.Provider>
 }
@@ -41,3 +27,38 @@ export const AuthProvider = ({Children})=>{
 export const useAuth =()=>{
   return useContext(AuthContext)
 }
+
+
+// import { useState, useEffect, useContext, createContext } from "react";
+
+// const AuthContext = createContext();
+
+// function AuthProvider({ children }) {
+//   const [auth, Setauth] = useState({
+//     user: null,
+//     token: "",
+//   });
+
+//   useEffect(() => {
+//     const data = localStorage.getItem("auth");
+
+//     if (data) {
+//       const ParseData = JSON.parse(data);
+//       Setauth({
+//         ...auth,
+//         user: ParseData.user,
+//         token: ParseData.token,
+//       });
+//     }
+//     //eslint-disable-next-line
+//   }, []);
+//   return (
+//     <AuthContext.Provider value={[auth, Setauth]}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// }
+
+// const useAuth = () => useContext(AuthContext);
+
+// export { useAuth, AuthProvider };

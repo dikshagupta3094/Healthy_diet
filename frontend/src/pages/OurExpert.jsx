@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
+import { Link } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -93,6 +94,7 @@ const OurExpert = () => {
             </CardContent>
             <CardActions disableSpacing>
 
+            <Link to = "/PostQuery">
               <Button
                 variant="contained"
 
@@ -104,6 +106,7 @@ const OurExpert = () => {
               >
                 Post Query
               </Button>
+              </Link>
               <Button
                 variant="outlined"
                 sx={{
