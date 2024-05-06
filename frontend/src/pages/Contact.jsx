@@ -1,11 +1,10 @@
-import { useState} from "react";
+
 import Layout from "../components/Layout";
 import { Box, Typography, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
-import { toast } from 'react-hot-toast'
 import '../styles/Contact.css'
 
 const DemoPaper = styled(Paper)(({ theme }) => ({
