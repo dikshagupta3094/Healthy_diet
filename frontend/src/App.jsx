@@ -11,9 +11,16 @@ import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import Logout from './pages/Logout'
 import PostQuery from './pages/PostQuery';
+import {io} from 'socket.io-client'
 import { AuthProvider } from './store/Auth';
+import { useEffect } from 'react';
 function App() {
-  
+  const socket = io('http://localhost:8000')
+    useEffect(()=>{
+      socket.on("connect",()=>{
+        console.log("Connected");
+      })
+    },[])
   return (
     <>
     <BrowserRouter>
