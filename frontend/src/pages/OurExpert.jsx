@@ -1,10 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
-<<<<<<< HEAD
 import Dietitians from "../components/Dietitians";
-=======
 import { Link } from "react-router-dom";
->>>>>>> f4a1d07af3fdfb4a8881079bb45ef35364e4a91c
 import {
   Box,
   Typography
@@ -60,7 +57,6 @@ return(
         description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
         />
 
-<<<<<<< HEAD
         <Dietitians
         avatar = "R"
         title = "Dt. Silky Mahajan"
@@ -76,7 +72,7 @@ return(
         img = {Dt1}
         description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
         />
-=======
+
             <Link to = "/PostQuery">
               <Button
                 variant="contained"
@@ -101,7 +97,6 @@ return(
               >
                 Know More
               </Button>
->>>>>>> f4a1d07af3fdfb4a8881079bb45ef35364e4a91c
 
         <Dietitians
         avatar = "R"
