@@ -18,12 +18,18 @@ const verifyToken = async(req,res,next)=>{
   if(!token){
     return next(new CustomError("Unauthenticated user",401))
   }
-  const user = jwt.verify(token,process.env.SECRET)
+  try {
+    const user = jwt.verify(token,process.env.SECRET)
     req.token = token
-    req.user = user
+    // req.user = user
+    req.user = await user_model.findById(user.id).select('-password')
     console.log("REQ USER",await req.user);
     console.log("REQ TOKEN",req.token);
     next()
+  } catch (error) {
+    console.log(error);
+    return next(CustomError("Invalid Token",400))
+  }
 }
 //at this middleware this req will have this user property
 const postQueryValidation =(role)=>{

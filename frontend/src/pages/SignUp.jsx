@@ -15,7 +15,7 @@ const SignUp = () => {
     password:"",
     role:""
   })
-
+   const [response, setResponse] = useState([])
   const navigate = useNavigate();
 
   const onfinishHandler = async (formData) => {
@@ -26,17 +26,28 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       })
       response = await response.json()
-      console.log("Response", response);
+      setResponse(response)
+       console.log("Response",  setResponse(response));
       
     if(response.message==='Account already created with associated data'){
+<<<<<<< HEAD
       toast.error('Already have account, no need to register again Please move to login',{
         autoClose: 5000
       })
+=======
+      message.error('Already have account,Not need to register again Please move to login')
+      return;
+    }
+    else if(response.message==='Already occupied username, please chosse another username'){
+      setTimeout(()=>{
+        message.error('Username is already taken by another user')
+      },1000)
+>>>>>>> e56b6e74a827e21fbef52409e3cd86ef1c17d0e8
     }
     else if(response){
         toast.success("Successfully register")
         navigate('/Login')
-      }
+    }
       else{
         message.error(response.data.message);
       }

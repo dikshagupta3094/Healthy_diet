@@ -6,15 +6,31 @@ import '../styles/Header.css'
 import  Diet from "../assets/Diet.png";
 import LogoutIcon from '@mui/icons-material/Logout';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useAuth } from "../store/Auth";
+import {message } from 'antd';
+import { useNavigate } from "react-router-dom";
 const Header = () => {
-
- 
-  // let user = JSON.parse(localStorage.getItem)
+    const navigation = useNavigate()
+    const [isLoggedIn,setLoggedIn] = useAuth()
+    console.log("Logged in",isLoggedIn);
     const [mobileOpen, setMobileOpen] = useState(false);
     // hndle menu click
     const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);
     };
+
+    //Handle logout 
+const [auth,setAuth] = useAuth()
+    const handleLogout = ()=>{
+      setAuth({
+        ...auth,
+        user: null,
+        token: "",
+      });
+      localStorage.removeItem('auth')
+      message.success('Logout successfully')
+      navigation('/')
+    }
     //menu drawer
     const drawer = (
       <Box onClick={handleDrawerToggle} sx={{ textAlign: "center"}}>
@@ -84,8 +100,8 @@ const Header = () => {
             <Box sx={{ display: { xs: "none", sm: "block" }, marginRight:"40px" }}>
               <ul className="navigation-menu">
                 <li>
-                  <NavLink activeClassName="active" to={"/"}>
-                  {/* <NavLink className="active" to={"/"}>  */}
+                  {/* <NavLink activeClassName="active" to={"/"}> */}
+                  <NavLink to={"/"}> 
                     Home
                   </NavLink>
                 </li>
@@ -95,16 +111,15 @@ const Header = () => {
                 <li>
                   <NavLink to={"/experts"}>Our Experts</NavLink>
                 </li>
-               <li>
-                <NavLink to={"/logout"}>
+                {isLoggedIn?( <li>
+                {/* <NavLink to={"/"}> */}
                   <Button variant="outlined" size="small" color="error" 
-                   sx={{marginTop: "2px"}}>
+                   sx={{marginTop: "2px"}} onClick={handleLogout}>
                     Logout
                    <LogoutIcon/>
                   </Button>
-                </NavLink>
-                </li> 
-                 <li>
+                {/* </NavLink> */}
+                </li> ):  <li>
                 <NavLink to={"/login"}>
                   <Button variant="outlined" size="small" color="error" 
                    sx={{marginTop: "2px"}}>
@@ -112,7 +127,10 @@ const Header = () => {
                    {/* <LogoutIcon/> */}
                   </Button>
                 </NavLink>
-                </li>
+                </li>}
+              
+                
+               
                 <li>
                   
                   <NotificationsIcon className="notification"/>

@@ -1,11 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 
 
 const ChatContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 const ChatProvider = ({ children }) => {
   const [selectedChat, setSelectedChat] = useState();
   const [user, setUser] = useState();
@@ -19,7 +18,7 @@ const ChatProvider = ({ children }) => {
     setUser(userInfo);
 
     if (!userInfo) navigate('/login');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [navigate]);
 
   return (
@@ -43,6 +42,5 @@ const ChatProvider = ({ children }) => {
  const ChatState = () => {
   return useContext(ChatContext);
 };
-
 
 export {ChatProvider,ChatState};

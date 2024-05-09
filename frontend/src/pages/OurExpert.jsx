@@ -3,12 +3,14 @@ import Layout from "../components/Layout";
 import Dietitians from "../components/Dietitians";
 import {
   Box,
-  Typography
+  Typography,Button
 } from "@mui/material";
 
 import Dt1 from "../assets/dt-1.jpg";
 import "../styles/OurExpert.css"
+import { useState,useEffect } from "react";
 const OurExpert = () =>{
+  
 return(
     <>
       <Layout>
@@ -32,13 +34,14 @@ return(
           </Typography>
         </Box>
         <div className="dtContainer">
-        <Dietitians
-        avatar = "R"
-        title = "Dt. Silky Mahajan"
-        subheader = "Health Coach"
-        img = {Dt1}
-        description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
-        />
+         
+          <Dietitians
+              avatar = "R"
+              title = "Dt. Silky Mahajan"
+              subheader = "Health Coach"
+              img = {Dt1}
+              description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
+          />
 
         <Dietitians
         avatar = "R"
@@ -46,6 +49,7 @@ return(
         subheader = "Health Coach"
         img = {Dt1}
         description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
+       
         />
 
         <Dietitians
@@ -88,4 +92,3 @@ return(
 };
 
 export default OurExpert;
-

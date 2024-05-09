@@ -21,18 +21,36 @@ exports.register = async(req,res,next)=>{
       if(userExist){
          return next(new CustomError('Account already created with associated data',400))
       }
-
+      const usernameImput = await user_model.findOne({username})
+      if(usernameImput){
+         return next(new CustomError('Already occupied username, please chosse another username',400))
+      }
       const user = await user_model.create({
          name,
          username,
          email,
          password,
          role, 
+         emailToken:crypto.randomBytes(64).toString('hex')
       })
+      // console.log("Email Token", emailToken);
+
       if(!user){
          return next(new CustomError('User registration failed',500))
       }
+      
       await user.save();
+      
+      //Sent email for verification
+   //    const verificationURL = `${BASE_URL}/emailVerification/${user.emailToken}`
+   //    // console.log("verification URL LINK:",verificationURL);
+   //    const message = `Hey ${user.name} Thank you for registerning. please click below link to verify your email \n\n${verificationURL}\n\n This link valid only for 2 minutes.`
+   //    console.log("Message:",message);
+   //   await sendEmail({
+   //       email:user.email,
+   //       subject:'Email verification link',
+   //       message
+   //    })
       res.status(201).json({
          success:true,
          message:"User registerd successfully",
@@ -46,6 +64,45 @@ exports.register = async(req,res,next)=>{
         msg:"Some internall error occurered"
      })
      
+   }
+}
+exports.verifyEmail = async(req,res,next)=>{
+   const emailToken = req.body.emailToken
+   if(!emailToken){
+      return next(CustomError('Email Token not found',400))
+   }
+   try {
+      const user = await user_model.findOne({emailToken})
+   if(user){
+      user.emailToken = null
+      user.isVerified = true
+   
+   await user.save()
+   const token = jwt.sign(user._id, process.env.SECRET,{expiresIn:Date.now()+ 2*60*1000})
+   res.status(200).json({
+      success:true,
+      _id: user._id,
+      name:user.name,
+      username:user.username,
+      email:user.email,
+      password:user.password,
+      role:user.role, 
+      token,
+      isVerified:user?.isVerified
+
+   })}
+   else{
+      res.status(404).json({
+         success:false,
+         message:"Email verification failed"
+      })
+   }
+   }catch (error) {
+      console.log(error);
+      res.status(500).json({
+         success:false,
+         mesaage:"Some internal error occured"
+      })
    }
 }
 exports.login = async(req,res,next)=>{
@@ -145,7 +202,31 @@ exports.resetPassword = async(req,res,next)=>{
      }
 }  
 
-exports.contact =async(req,res,next)=>{
+exports.getDietExpertId = async(req,res,next)=>{
+    try {
+      const dietExpert = await user_model.find({role:'Diet expert'})
+      const dietExpertId = dietExpert.map(user => user._id)
+      res.status(200).json({
+         success:true,
+         message:"Expert Id",
+         UsersId:dietExpertId,
+         data:dietExpert
+      })
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+         success:false,
+         message:"Some internall error occured"
+      })
+    }
+}
+
+exports.getAllUser = async(req,res,next)=>{
+   const keyword = req.query
+   console.log(keyword);
+   const users = await user_model.find(keyword).find({_id:{$ne:req.user._id}})
+   res.status(200).send(users)
+}exports.contact =async(req,res,next)=>{
    const{name,email,phone,subject,message} = req.body
  
   try {
