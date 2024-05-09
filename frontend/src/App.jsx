@@ -13,8 +13,7 @@ import Logout from './pages/Logout'
 import PostQuery from './pages/PostQuery';
 import ChatPage from './pages/ChatPage'
 import {io} from 'socket.io-client'
-import { AuthProvider } from './store/Auth';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 function App() {
   //Socket io
   const socket = io('http://localhost:8000')
@@ -22,6 +21,7 @@ function App() {
       socket.on("connect",()=>{
         console.log("Connected");
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
   return (
     <>  

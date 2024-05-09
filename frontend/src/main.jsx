@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom/client'
 import 'antd/dist/reset.css'
 import App from './App.jsx'
 import './index.css'
-// import { AuthProvider } from './store/Auth.jsx'
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from 'react-router-dom'
-import {ChatProvider} from './store/ChatProvider.jsx'
 import { AuthProvider } from './store/Auth.jsx'
 import {ChatProvider} from './store/ChatProvider.jsx'
-import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
     <ChatProvider>
     <BrowserRouter>
     <App />
@@ -32,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     />
     </BrowserRouter>
     </ChatProvider>
+    </AuthProvider>
   </React.StrictMode>
    
 )
