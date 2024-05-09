@@ -1,11 +1,12 @@
 import  { useState } from 'react'
 import { Form, Input, message } from 'antd';
 import {Link, json, useNavigate} from 'react-router-dom'
+import {useAuth} from "../store/Auth"
 import '../styles/Login.css'
 
 
 const Login = () => {
-
+const [userauth,SetUserAuth] = useAuth();
 const [formData,setFormData] = useState({
   email:"",
   password:"",
@@ -29,18 +30,15 @@ const [formData,setFormData] = useState({
      else if(response){
       setAuth({
         ...auth, 
-        Id: response.data._id,
+        user: response.data ,
         token: response.token,
       });
       localStorage.setItem(
         "auth",
-        JSON.stringify({  Id: response.data._id, token: response.token })
+        JSON.stringify({  user: response.data, token: response.token })
       );
-      console.log("Id",response.data._id);
-        // localStorage.setItem(JSON.stringify({'token':response.token,'Id':response.data._id}))
-      //  -----
+      console.log("user",response.data); 
         setAuth(true)
-        // ----
         message.success('Successfully Logged In!')
         navigate('/')
       }else{

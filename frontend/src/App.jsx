@@ -11,10 +11,12 @@ import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import Logout from './pages/Logout'
 import PostQuery from './pages/PostQuery';
+import ChatPage from './pages/ChatPage'
 import {io} from 'socket.io-client'
 import { AuthProvider } from './store/Auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 function App() {
+  //Socket io
   const socket = io('http://localhost:8000')
     useEffect(()=>{
       socket.on("connect",()=>{
@@ -22,26 +24,24 @@ function App() {
       })
     },[])
   return (
-    <>
-    <BrowserRouter>
-  
+    <>  
     <Routes>
       <Route path="/" element={<HomePage/>}/>
       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
       <Route path="/resetPassword/:token" element={<ResetPassword/>}/>
-      <Route path="/signup" element={<SignUp/>} />
+      <Route path="/signup" element={<SignUp />} /> 
       <Route path="/about" element={<About/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/experts" element={<OurExpert/>}/>
-      <Route path="/contact" element={<ContactUs/>}/>
       <Route path="/Logout" element={<Logout/>}/>
+      <Route path='/experts'element={<OurExpert/>}/>
+      <Route path="/contact" element={<ContactUs/>}/>
       <Route path="/PostQuery" element={<PostQuery/>}/>
+      <Route path="/ChatPage" element={<ChatPage/>}/>
       <Route path="*" element={< PageNotFound/>}/>
     </Routes>
-
-    </BrowserRouter>
     </>
   );
 }
 
 export default App
+

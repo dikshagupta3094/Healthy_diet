@@ -18,10 +18,30 @@ import {
   import PropTypes from 'prop-types'
 //   import Dt1 from "../assets/dt-1.jpg";
   import "../styles/OurExpert.css"
-  import { Link } from "react-router-dom";
+  import { Link, NavLink } from "react-router-dom";
+  import { useState,useEffect } from "react";
+// import { postQuery } from "../../../Backend/controller/query.controller";
+//Making Changes
+ const fetchDietExpertId = async()=>{
+       try {
+        const response = await fetch('http://localhost:8000/api/auth/getDietExpertId',{
+        method:'GET'
+       })
+       if(!response.ok){
+        throw new Error('Error occured')
+       }
+       const data = await response.json()
+       console.log("Expert Data",data);
+        data.dietExpert
+        console.log("Set diet expert",  setDietExpertId(data));
+       } catch (error) {
+         console.log(error);
+       }
+
+  }
   
 function Dietitians(props){
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
   
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -33,8 +53,22 @@ function Dietitians(props){
   
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
-  
-  
+   
+    
+    const [dietExpert,setDietExpertId] = useState([])
+    useEffect(() => {
+   
+    const fetchData = async () => {
+      const id = await fetchDietExpertId();
+      console.log("All Ids",id);
+      if (id) {
+        setDietExpertId(id);
+        console.log("Id",setDietExpertId(id));
+      }
+    };
+    fetchData();
+  }, []);
+
     return(
       <Box
       sx={{
@@ -67,19 +101,24 @@ function Dietitians(props){
             {props.description}
           </Typography>
         </CardContent>
+  
         <CardActions disableSpacing>
-        <Link to="/PostQuery">
-          <Button
-            variant="contained"
-            sx={{
-              marginRight: "6px", bgcolor: "#65B741", "&:hover": {
-                bgcolor: "#5a9f3c"
-              }
-            }}
-          >
-            Post Query
-          </Button>
-          </Link>
+        {/* {dietExpert.length>0 && dietExpert.map(()=>{ */}
+          {/* console.log("Hello"); */}
+          <NavLink to= {'/postQuery'}>
+            <Button id= {props.id}
+              variant="contained"
+              sx={{
+                marginRight: "6px", bgcolor: "#65B741", "&:hover": {
+                  bgcolor: "#5a9f3c"
+                }
+              }}
+            >
+              Post Query
+            </Button>
+          </NavLink>
+         {/* })} */}
+       
           <Button
             variant="outlined"
             sx={{
@@ -138,8 +177,8 @@ function Dietitians(props){
     title: PropTypes.string.isRequired,
     subheader: PropTypes.string.isRequired,
     img: PropTypes.element.isRequired,
-    description: PropTypes.string.isRequired
-
+    description: PropTypes.string.isRequired,
+    id:PropTypes.number.isRequired
   }
 
   export default Dietitians
