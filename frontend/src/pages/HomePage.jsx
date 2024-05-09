@@ -15,7 +15,6 @@ import BMI from "../assets/bmi.jpg"
 
 const HomePage = () => {
 
-
   const [heightValue, setHeightValue] = useState(''); 
   const [weightValue, setWeightValue] = useState(''); 
   const [bmiValue, setBmiValue] = useState(''); 

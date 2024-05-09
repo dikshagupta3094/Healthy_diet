@@ -17,10 +17,10 @@
     width: 50px;
   }
 
-  .active {
+   .active {
     color: #65B741 !important;
     font-weight: bold !important;
-  }
+  } 
   /* mobile view */
   .mobile-navigation {
     list-style: none;

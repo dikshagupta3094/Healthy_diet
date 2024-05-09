@@ -1,0 +1,26 @@
+.queryForm{
+    border: 0.2px solid rgb(221, 221, 221);
+    padding: 35px 30px 0;
+    border-radius: 6px;
+    width: fit-content;
+    margin: 40px auto 0;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.queryForm input{
+    width: 500px;
+}
+
+.queryForm button{
+    width: 40%;
+    padding: 8px;
+    background-color: #65b741;
+    border-radius: 10px;
+    margin: 15px auto 10px;
+    border-color: transparent;
+    color: white;
+}

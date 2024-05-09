@@ -30,8 +30,8 @@ const Header = () => {
         <Divider />
         <ul className="mobile-navigation">
         <li>
-          {/* <NavLink activeClassName="active" to={"/"}> */}
-          <NavLink className="active" to={"/"}>
+          <NavLink to={"/"}>
+          {/* <NavLink className="active" to={"/"}> */}
             Home
             
           </NavLink>
@@ -84,8 +84,8 @@ const Header = () => {
             <Box sx={{ display: { xs: "none", sm: "block" }, marginRight:"40px" }}>
               <ul className="navigation-menu">
                 <li>
-                  {/* <NavLink activeClassName="active" to={"/"}> */}
-                  <NavLink className="active" to={"/"}> 
+                  <NavLink activeClassName="active" to={"/"}>
+                  {/* <NavLink className="active" to={"/"}>  */}
                     Home
                   </NavLink>
                 </li>

@@ -7,5 +7,6 @@ authRouter.post('/register',[registerValidtion],register)
 authRouter.post('/login',login)
 authRouter.post('/forgotPassword',forgotPassword)
 authRouter.post('/resetPassword/:resetToken',resetPassword)
+authRouter.post('/contact', contact)
 module.exports = authRouter
 

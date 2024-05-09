@@ -44,7 +44,7 @@ function Dietitians(props){
         margin: "50px auto",
       }}
     >
-      <Card sx={{ minWidth:345, maxWidth: 345, margin: "50px auto" }}>
+      <Card  sx={{ minWidth:345, maxWidth: 345, margin: "50px auto" }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -69,7 +69,7 @@ function Dietitians(props){
         </CardContent>
         <CardActions disableSpacing>
         <Link to="/PostQuery">
-          <Button
+          <Button id=""
             variant="contained"
             sx={{
               marginRight: "6px", bgcolor: "#65B741", "&:hover": {

@@ -5,6 +5,7 @@ const sendEmail = require('../utilis/sendEmail.utilis.js')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { AsyncResource } = require('async_hooks')
 
 //FORNTEND URL
 const BASE_URL = process.env.BASE_URL
@@ -144,3 +145,34 @@ exports.resetPassword = async(req,res,next)=>{
      }
 }  
 
+exports.contact =async(req,res,next)=>{
+   const{name,email,phone,subject,message} = req.body
+ 
+  try {
+   const user = await user_model.find({email})
+   if(!user){
+      return next(CustomError('Please register first',400))
+   }
+}catch (error) {
+   console.log(error);
+       res.status(500).json({
+         success:false,
+         message:"Some internall error occured"
+       })
+}
+   const mailOptions = {
+      from: email,
+      to: process.env.EMAIL_USER,
+      subject: `Contact Form Message from ${name}`,
+      text: message,
+   };
+   
+       try {
+      await transporter.sendMail(mailOptions);
+      res.json({ message: 'Email sent successfully!' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error sending email.' });
+    }
+   
+}

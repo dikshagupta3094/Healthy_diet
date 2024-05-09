@@ -1,10 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-<<<<<<< HEAD
 import Dietitians from "../components/Dietitians";
-=======
-import { Link } from "react-router-dom";
->>>>>>> f4a1d07af3fdfb4a8881079bb45ef35364e4a91c
 import {
   Box,
   Typography
@@ -60,7 +56,6 @@ return(
         description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
         />
 
-<<<<<<< HEAD
         <Dietitians
         avatar = "R"
         title = "Dt. Silky Mahajan"
@@ -76,32 +71,6 @@ return(
         img = {Dt1}
         description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
         />
-=======
-            <Link to = "/PostQuery">
-              <Button
-                variant="contained"
-
-                sx={{
-                  marginRight: "6px", bgcolor: "#65B741", "&:hover": {
-                    bgcolor: "#5a9f3c"
-                  }
-                }}
-              >
-                Post Query
-              </Button>
-              </Link>
-              <Button
-                variant="outlined"
-                sx={{
-                  color: "#65B741", borderColor: "#65B741", "&:hover": {
-                    color: "#5a9f3c", borderColor: "#5a9f3c"
-                  }
-                }}
-                aria-describedby={id} onClick={handleClick}
-              >
-                Know More
-              </Button>
->>>>>>> f4a1d07af3fdfb4a8881079bb45ef35364e4a91c
 
         <Dietitians
         avatar = "R"

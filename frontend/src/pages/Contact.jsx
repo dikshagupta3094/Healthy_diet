@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import Layout from "../components/Layout";
 import { Box, Typography, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -6,6 +6,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import '../styles/Contact.css'
+import { toast } from 'react-toastify';
 
 const DemoPaper = styled(Paper)(({ theme }) => ({
   width: 380,
@@ -18,6 +19,28 @@ const DemoPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const Contact = () => {
+
+  const [status, setStatus] = useState("Submit");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("Sending...");
+    const { name, email, message } = e.target.elements;
+    let details = {
+      name: name.value,
+      email: email.value,
+      message: message.value,
+    };
+    let response = await fetch("http://localhost:5173/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(details),
+    });
+    setStatus("Submit");
+    let result = await response.json();
+    toast.success(result.status);
+  };
 
   return (
     <>
@@ -141,33 +164,32 @@ const Contact = () => {
                   textAlign={"center"}
                   marginBottom={"40px"}
               >Write Us</Typography>
-              <form 
-                  action="mailto:anushasahu0507@gmail.com" 
+              <form onSubmit={handleSubmit}
                   method="post" >
                 <div>
                 <label htmlFor="name" >           
                   Your Name :</label> <br />
-                <input type="text" name="name" autoComplete="off" required />
+                <input type="text" name="name" id='name' autoComplete="off" required />
                 </div>
                 <div>
                 <label htmlFor="email">Your Email Address :</label> <br />
-                <input type="text" name="email" autoComplete="off" required /> 
+                <input type="text" name="email" id='email' autoComplete="off" required /> 
                 </div>
                 <div>
                 <label htmlFor="phone">Your Phone No. :</label> <br />
-                <input type="tel" name="phone" autoComplete="off" required />
+                <input type="tel" name="phone" id='phone' autoComplete="off" required />
                 </div>
                 <div>
                 <label htmlFor="subject">Subject :</label> <br />
-                <input type="text" name="subject" autoComplete="off" required /> 
+                <input type="text" name="subject" id='subject' autoComplete="off" required /> 
                 </div>
                 <div>
                 <label htmlFor="message">Your Message :</label> <br />
-                <textarea name="message" placeholder="Write a message.." autoComplete="off" rows="4" cols="60" required></textarea>
+                <textarea name="message" id='message' placeholder="Write a message.." autoComplete="off" rows="4" cols="60" required></textarea>
                 </div>
                 <div>
                 <button type="submit" className="btn btn-primary" >
-                  Submit
+                {status}
                 </button>
                 </div>
               </form>
