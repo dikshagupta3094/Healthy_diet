@@ -6,21 +6,24 @@ const postQuerySchema = new mongoose.Schema({
         ref:'user',
         required:true
     },
-    // expertId:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:'user',
-    //     default:null
-    // },
-    content:{
-        type:String,
+    expertId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user',
         required:true
-    },
-    dietaryGoals:{
-        type:[String]
     },
     age:{
         type:Number,
+        trim:true,
+        required:true
+    },
+    content:{
+        type:String,
         required:true,
+        trim:true
+    },
+    dietaryGoals:{
+        type:[String],
+        required:true
     },
     status:{
         type:String,

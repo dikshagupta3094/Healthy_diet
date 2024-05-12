@@ -13,13 +13,13 @@ const ChatProvider = ({ children }) => {
 
   const navigate = useNavigate(); 
 
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("auth"));
-    setUser(userInfo);
+  // useEffect(() => {
+  //   const userInfo = JSON.parse(localStorage.getItem("auth"));
+  //   setUser(userInfo);
 
-    if (!userInfo) navigate('/login');
+  //   if (!userInfo) navigate('/login');
     
-  }, [navigate]);
+  // }, [navigate]);
 
   return (
     <ChatContext.Provider

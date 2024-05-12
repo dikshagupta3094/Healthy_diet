@@ -10,26 +10,24 @@ import { useAuth } from "../store/Auth";
 import {message } from 'antd';
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-    const navigation = useNavigate()
-    const [isLoggedIn,setLoggedIn] = useAuth()
-    console.log("Logged in",isLoggedIn);
+    const navigate = useNavigate()
+    const [forceUpdate, setForceUpdate] = useState(false);
+    const [auth,setAuth] = useAuth()
+    console.log("Auth",auth);
     const [mobileOpen, setMobileOpen] = useState(false);
     // hndle menu click
     const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);
     };
-
     //Handle logout 
-const [auth,setAuth] = useAuth()
     const handleLogout = ()=>{
       setAuth({
         ...auth,
         user: null,
-        token: "",
-      });
-      localStorage.removeItem('auth')
-      message.success('Logout successfully')
-      navigation('/')
+        token: ""})
+        localStorage.removeItem('auth');
+        message.success('Logout successfully');
+        navigate('/')
     }
     //menu drawer
     const drawer = (
@@ -47,9 +45,7 @@ const [auth,setAuth] = useAuth()
         <ul className="mobile-navigation">
         <li>
           <NavLink to={"/"}>
-          {/* <NavLink className="active" to={"/"}> */}
-            Home
-            
+            Home   
           </NavLink>
         </li>
         <li>
@@ -69,6 +65,7 @@ const [auth,setAuth] = useAuth()
         </li>
       </ul>
     </Box>);
+    
 
   return (
     <>
@@ -100,7 +97,6 @@ const [auth,setAuth] = useAuth()
             <Box sx={{ display: { xs: "none", sm: "block" }, marginRight:"40px" }}>
               <ul className="navigation-menu">
                 <li>
-                  {/* <NavLink activeClassName="active" to={"/"}> */}
                   <NavLink to={"/"}> 
                     Home
                   </NavLink>
@@ -108,31 +104,69 @@ const [auth,setAuth] = useAuth()
                 <li>
                   <NavLink to={"/about"}>About Us</NavLink>
                 </li>
-                <li>
+                {auth.token ? (
+              <>
+               {auth.user && auth.user.role === 'user' ? (
+               <li>
+                <NavLink to={'/experts'}>Our Expert</NavLink>
+              </li>
+              ) : (
+              <li>
+                <NavLink to={'/ViewQuery'}>View Query</NavLink>
+            </li>
+            )}
+            <li>
+             <Button variant="outlined" size="small" color="error"
+                sx={{ marginTop: "2px" }} onClick={handleLogout}>
+                Logout
+                <LogoutIcon />
+             </Button>
+            </li>
+         </>
+          ) : (
+            <>
+          <li>
+            <NavLink to={'/login'}>
+              <Button variant="outlined" size="small" color="error"
+                sx={{ marginTop: "2px" }}>
+                Login
+              </Button>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to={'/signup'}>
+              <Button variant="outlined" size="small" color="error"
+                sx={{ marginTop: "2px" }}>
+                Register
+              </Button>
+            </NavLink>
+          </li>
+
+          </>
+)}
+
+                {/* <li>
                   <NavLink to={"/experts"}>Our Experts</NavLink>
                 </li>
-                {isLoggedIn?( <li>
-                {/* <NavLink to={"/"}> */}
+                <li>
+                  <NavLink to = {'/ViewQuery'}> View Query </NavLink>
+                </li>
+                {isLoggedIn === true? ( <li>
                   <Button variant="outlined" size="small" color="error" 
-                   sx={{marginTop: "2px"}} onClick={handleLogout}>
+                   sx={{marginTop: "2px"}} onClick={()=>{handleLogout()}}>
                     Logout
                    <LogoutIcon/>
                   </Button>
-                {/* </NavLink> */}
-                </li> ):  <li>
+                </li> ): ( <li>
                 <NavLink to={"/login"}>
                   <Button variant="outlined" size="small" color="error" 
                    sx={{marginTop: "2px"}}>
                     Login
-                   {/* <LogoutIcon/> */}
                   </Button>
                 </NavLink>
-                </li>}
-              
-                
-               
+                </li>)} */}
                 <li>
-                  
                   <NotificationsIcon className="notification"/>
                 </li>
                

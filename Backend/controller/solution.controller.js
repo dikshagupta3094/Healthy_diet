@@ -5,12 +5,12 @@ const CustomError = require('../utilis/customError.utilis.js')
 
 exports.postSolution = async(req,res,next)=>{
   const queryId = req.params.queryId
-  const {content,expertId} = req.body
+  const {content} = req.body
   
   if(!queryId){
     return next(new CustomError('Please provide query ID'))
   }
-  if(!content || !expertId){
+  if(!content){
     return next(new CustomError('Please provide all fields'),400)
   }
   try {
@@ -28,7 +28,7 @@ exports.postSolution = async(req,res,next)=>{
     }
     const querySolution = await post_solution.create({
         queryId,
-        expertId,
+        // expertId,
         content
     })
    await querySolution.save();
@@ -50,6 +50,6 @@ exports.postSolution = async(req,res,next)=>{
 }
 
 exports.viewSolution = (req,res,next)=>{
-     
+    
 }
 

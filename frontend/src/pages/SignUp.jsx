@@ -3,7 +3,6 @@ import { Form, Input, Radio, message} from 'antd';
 import '../styles/SignUp.css'
 import {Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 
 const SignUp = () => {
@@ -27,14 +26,8 @@ const SignUp = () => {
       })
       response = await response.json()
       setResponse(response)
-       console.log("Response",  setResponse(response));
       
     if(response.message==='Account already created with associated data'){
-<<<<<<< HEAD
-      toast.error('Already have account, no need to register again Please move to login',{
-        autoClose: 5000
-      })
-=======
       message.error('Already have account,Not need to register again Please move to login')
       return;
     }
@@ -42,10 +35,9 @@ const SignUp = () => {
       setTimeout(()=>{
         message.error('Username is already taken by another user')
       },1000)
->>>>>>> e56b6e74a827e21fbef52409e3cd86ef1c17d0e8
     }
     else if(response){
-        toast.success("Successfully register")
+        message.success("Successfully register")
         navigate('/Login')
     }
       else{

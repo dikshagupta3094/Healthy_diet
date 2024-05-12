@@ -222,11 +222,18 @@ exports.getDietExpertId = async(req,res,next)=>{
 }
 
 exports.getAllUser = async(req,res,next)=>{
-   const keyword = req.query
+   const keyword = req.query.search
    console.log(keyword);
-   const users = await user_model.find(keyword).find({_id:{$ne:req.user._id}})
-   res.status(200).send(users)
-}exports.contact =async(req,res,next)=>{
+   console.log("Id",req.user._id);
+   try {
+      const users = await user_model.find(keyword).find({_id:{$ne:req.user._id}});
+      res.status(200).send(users)
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+exports.contact =async(req,res,next)=>{
    const{name,email,phone,subject,message} = req.body
  
   try {
@@ -257,3 +264,4 @@ exports.getAllUser = async(req,res,next)=>{
     }
    
 }
+

@@ -22,23 +22,23 @@ import {
   import { useState,useEffect } from "react";
 // import { postQuery } from "../../../Backend/controller/query.controller";
 //Making Changes
- const fetchDietExpertId = async()=>{
-       try {
-        const response = await fetch('http://localhost:8000/api/auth/getDietExpertId',{
-        method:'GET'
-       })
-       if(!response.ok){
-        throw new Error('Error occured')
-       }
-       const data = await response.json()
-       console.log("Expert Data",data);
-        data.dietExpert
-        console.log("Set diet expert",  setDietExpertId(data));
-       } catch (error) {
-         console.log(error);
-       }
+//  const fetchDietExpertId = async()=>{
+//        try {
+//         const response = await fetch('http://localhost:8000/api/auth/getDietExpertId',{
+//         method:'GET'
+//        })
+//        if(!response.ok){
+//         throw new Error('Error occured')
+//        }
+//        const data = await response.json()
+//        console.log("Expert Data",data);
+//         data.dietExpert
+//         console.log("Set diet expert",  setDietExpertId(data));
+//        } catch (error) {
+//          console.log(error);
+//        }
 
-  }
+//   }
   
 function Dietitians(props){
     const [anchorEl, setAnchorEl] = useState(null);
@@ -55,20 +55,26 @@ function Dietitians(props){
     const id = open ? 'simple-popover' : undefined;
    
     
-    const [dietExpert,setDietExpertId] = useState([])
-    useEffect(() => {
-   
-    const fetchData = async () => {
-      const id = await fetchDietExpertId();
-      console.log("All Ids",id);
-      if (id) {
-        setDietExpertId(id);
-        console.log("Id",setDietExpertId(id));
-      }
-    };
-    fetchData();
-  }, []);
-
+    // const [dietExpert,setDietExpertId] = useState([])
+    //  useEffect(()=>{
+    //     const fetchExpertIds  = async()=>{
+    //       try {
+    //         const response = await fetch('http://localhost:8000/api/auth/getDietExpertId',{
+    //            method:'GET'
+    //         })
+    //         if (!response.ok) {
+    //           throw new Error('Failed to fetch dietitians');
+    //         }
+    //         const data = await response.json()
+    //         console.log(data);
+    //         setDietExpertId(data.UsersId)
+    //         console.log("Diet Id",data.UsersId);
+    //       } catch (error) {
+    //         console.log("Error while fetching expert Id",error);
+    //       }
+    //     }
+    //     fetchExpertIds()
+    //  },[])
     return(
       <Box
       sx={{
@@ -101,22 +107,26 @@ function Dietitians(props){
             {props.description}
           </Typography>
         </CardContent>
-  
+    
         <CardActions disableSpacing>
-        {/* {dietExpert.length>0 && dietExpert.map(()=>{ */}
-          {/* console.log("Hello"); */}
-          <NavLink to= {'/postQuery'}>
-            <Button id= {props.id}
-              variant="contained"
-              sx={{
-                marginRight: "6px", bgcolor: "#65B741", "&:hover": {
-                  bgcolor: "#5a9f3c"
-                }
-              }}
-            >
-              Post Query
-            </Button>
-          </NavLink>
+          {/* {dietExpert.length > 0 && dietExpert.map((id,index)=>{
+              console.log("Mapping dietitian with id:", id); */}
+            {/* return( */}
+              <NavLink to= {`/postQuery/${props.dietitianId}`}>
+              <Button variant="contained"
+                sx={{
+                  marginRight: "6px", bgcolor: "#65B741", "&:hover": {
+                    bgcolor: "#5a9f3c"
+                  }
+                }}
+              >
+                Post Query
+              </Button>
+            </NavLink>
+            {/* )
+          })} */}
+
+         
          {/* })} */}
        
           <Button
@@ -178,7 +188,7 @@ function Dietitians(props){
     subheader: PropTypes.string.isRequired,
     img: PropTypes.element.isRequired,
     description: PropTypes.string.isRequired,
-    id:PropTypes.number.isRequired
+    dietitianId: PropTypes.string.isRequired
   }
 
   export default Dietitians

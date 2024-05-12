@@ -1,19 +1,16 @@
 import  { useState } from 'react'
 import { Form, Input, message } from 'antd';
-import {Link, json, useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from "../store/Auth"
 import '../styles/Login.css'
-
-
 const Login = () => {
-const [userauth,SetUserAuth] = useAuth();
+  const [auth,setAuth] = useAuth();
 const [formData,setFormData] = useState({
   email:"",
   password:"",
 })
 
   const navigate = useNavigate();
-  const [auth,setAuth] = useState(false)
   const onfinishHandler = async (formData) => {
     try {
       let response = await fetch('http://localhost:8000/api/auth/login',{
@@ -32,12 +29,11 @@ const [formData,setFormData] = useState({
         ...auth, 
         user: response.data ,
         token: response.token,
-      });
+      });     
       localStorage.setItem(
         "auth",
         JSON.stringify({  user: response.data, token: response.token })
       );
-      console.log("user",response.data); 
         setAuth(true)
         message.success('Successfully Logged In!')
         navigate('/')
@@ -56,10 +52,10 @@ const [formData,setFormData] = useState({
       <Form layout='vertical' onFinish={onfinishHandler} className='login-form'>
       <h3 className="text-center pb-2">Login</h3>
       <Form.Item label="Email" name="email" >
-                <Input className='input' type='email' required value={formData.email} onChange={(e)=>setFormData(e.target.value)} />
+                <Input className='input' type='email' required value={formData.email} onChange={(e)=>setFormData({...formData, email: e.target.value})} />
             </Form.Item>
             <Form.Item label="Password" name="password">
-                <Input className='input' type='password' required value={formData.password} onChange={(e)=>setFormData(e.target.value)}/>
+                <Input className='input' type='password' required value={formData.password} onChange={(e)=>setFormData({...formData, password: e.target.value})}/>
             </Form.Item>
             <Link to='/forgotpassword'>Forgot Password?</Link>
             <button className='btn btn-success' type="submit">Login</button>

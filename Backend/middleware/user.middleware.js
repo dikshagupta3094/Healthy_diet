@@ -22,13 +22,14 @@ const verifyToken = async(req,res,next)=>{
     const user = jwt.verify(token,process.env.SECRET)
     req.token = token
     // req.user = user
-    req.user = await user_model.findById(user.id).select('-password')
+     req.user = await user_model.findById(user.id).select('-password')
+     
     console.log("REQ USER",await req.user);
     console.log("REQ TOKEN",req.token);
     next()
   } catch (error) {
     console.log(error);
-    return next(CustomError("Invalid Token",400))
+    return next(new CustomError("Invalid Token",400))
   }
 }
 //at this middleware this req will have this user property

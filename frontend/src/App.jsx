@@ -9,8 +9,9 @@ import ContactUs from './pages/Contact';
 import PageNotFound from './pages/PageNotFound';
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
-import Logout from './pages/Logout'
 import PostQuery from './pages/PostQuery';
+import ViewQuery from './pages/ViewQuery'
+import PostSolution from './pages/PostSolution'
 import ChatPage from './pages/ChatPage'
 import {io} from 'socket.io-client'
 import { useEffect} from 'react';
@@ -32,10 +33,11 @@ function App() {
       <Route path="/signup" element={<SignUp />} /> 
       <Route path="/about" element={<About/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/Logout" element={<Logout/>}/>
+      <Route path="/ViewQuery" element={<ViewQuery/>}/>
       <Route path='/experts'element={<OurExpert/>}/>
       <Route path="/contact" element={<ContactUs/>}/>
-      <Route path="/PostQuery" element={<PostQuery/>}/>
+      <Route path="/PostQuery/:expertId" element={<PostQuery/>}/>
+      <Route path='/ViewQuery/PostSolution/:queryId' element = {<PostSolution/>}/>
       <Route path="/ChatPage" element={<ChatPage/>}/>
       <Route path="*" element={< PageNotFound/>}/>
     </Routes>

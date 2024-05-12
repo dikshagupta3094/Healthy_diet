@@ -10,10 +10,10 @@ import { AuthProvider } from './store/Auth.jsx'
 import {ChatProvider} from './store/ChatProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
+    <BrowserRouter>
     <AuthProvider>
     <ChatProvider>
-    <BrowserRouter>
     <App />
     <ToastContainer
       position="top-center"
@@ -28,9 +28,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       theme="colored"
       transition: Bounce
     />
-    </BrowserRouter>
     </ChatProvider>
-    </AuthProvider>
-  </React.StrictMode>
+    </AuthProvider>  
+    </BrowserRouter>
+  //  </React.StrictMode> 
    
 )
