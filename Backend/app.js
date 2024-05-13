@@ -40,6 +40,19 @@ const io = new Server(server,{
 io.on("connection", (socket) => {
     console.log("connected - socket");
 
+    //Notification -  POST QUERY
+
+  socket.on('PostQuery',(formData,expertId)=>{
+    console.log('Post query event recived');
+    io.to(expertId).emit('newQueryNotification', 'Someone has posted a query');
+  })
+  //Notication ends here
+
+  //POST SOLUTION 
+  socket.on('postSolution', (solution, queryId) => {
+    console.log('Post solution event recived');
+    io.to(queryId).emit('newSolutionNotification', 'Diet expert has posted a solution');
+});
     socket.on("disconnect",()=>{
         console.log("Disconnect");
     })

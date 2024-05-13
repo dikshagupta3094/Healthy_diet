@@ -13,6 +13,9 @@ import PostQuery from './pages/PostQuery';
 import ViewQuery from './pages/ViewQuery'
 import PostSolution from './pages/PostSolution'
 import ChatPage from './pages/ChatPage'
+import EmailVerification from './pages/EmailVerification'
+import VerificationInfo from './pages/VerificationInfo'
+import ViewSolution from './pages/ViewSolution';
 import {io} from 'socket.io-client'
 import { useEffect} from 'react';
 function App() {
@@ -30,7 +33,9 @@ function App() {
       <Route path="/" element={<HomePage/>}/>
       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
       <Route path="/resetPassword/:token" element={<ResetPassword/>}/>
-      <Route path="/signup" element={<SignUp />} /> 
+      <Route path="/signup" element={<SignUp />} />
+      <Route path='/emailVerification/:emailToken' element={<EmailVerification/>}/>
+      <Route path='/VerificationInfo' element={<VerificationInfo/>}/>
       <Route path="/about" element={<About/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/ViewQuery" element={<ViewQuery/>}/>
@@ -38,6 +43,7 @@ function App() {
       <Route path="/contact" element={<ContactUs/>}/>
       <Route path="/PostQuery/:expertId" element={<PostQuery/>}/>
       <Route path='/ViewQuery/PostSolution/:queryId' element = {<PostSolution/>}/>
+      <Route path='/MyQuries' element ={<ViewSolution/>}/>
       <Route path="/ChatPage" element={<ChatPage/>}/>
       <Route path="*" element={< PageNotFound/>}/>
     </Routes>

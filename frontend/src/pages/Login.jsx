@@ -24,6 +24,9 @@ const [formData,setFormData] = useState({
       if(response.message==='Email and password does not match'){
         message.error('Invalid Email and password')
       }
+      else if(response.message==="Please verifed your email first"){
+        message.error('Email is not verified')
+      }
      else if(response){
       setAuth({
         ...auth, 

@@ -28,7 +28,7 @@ function ViewQuery() {
             setUserQueries(response.expertQueries)
             console.log("response",userQuery);
             if(response.message === 'Query fetched successfully'){
-              toast.success('Query fetched successfully')
+              // toast.success('Query fetched successfully')
             }
            } catch (error) {
             console.log(error);
@@ -44,9 +44,10 @@ function ViewQuery() {
             <h2> View Query page</h2>
             <ul>
             {userQuery && userQuery.map((query) =>{
+              console.log("Query Id",query._id)
               return(
                 <div>
-                  <li key={query._id}>Content: {query.content}</li>
+                  <li key={query._id}>Content: {query.content} age: {query.age} Dietary Goals {query.dietaryGoals} status {query.status}</li>
                    <NavLink to={`PostSolution/${query._id}`}>
                     <button type='submit'>Post Solution</button>
                    </NavLink>

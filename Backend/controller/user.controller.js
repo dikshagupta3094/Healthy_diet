@@ -33,6 +33,7 @@ exports.register = async(req,res,next)=>{
          role, 
          emailToken:crypto.randomBytes(64).toString('hex')
       })
+
       // console.log("Email Token", emailToken);
 
       if(!user){
@@ -41,16 +42,17 @@ exports.register = async(req,res,next)=>{
       
       await user.save();
       
-      //Sent email for verification
-   //    const verificationURL = `${BASE_URL}/emailVerification/${user.emailToken}`
-   //    // console.log("verification URL LINK:",verificationURL);
-   //    const message = `Hey ${user.name} Thank you for registerning. please click below link to verify your email \n\n${verificationURL}\n\n This link valid only for 2 minutes.`
-   //    console.log("Message:",message);
-   //   await sendEmail({
-   //       email:user.email,
-   //       subject:'Email verification link',
-   //       message
-   //    })
+      // Sent email for verification
+
+      const verificationURL = `${BASE_URL}/emailVerification/${user.emailToken}`
+      // console.log("verification URL LINK:",verificationURL);
+      const message = `Hey ${user.name} Thank you for registerning. please click below link to verify your email \n\n${verificationURL}\n\n This link valid only for 2 minutes.`
+      console.log("Message:",message);
+     await sendEmail({
+         email:user.email,
+         subject:'Email verification link',
+         message
+      })
       res.status(201).json({
          success:true,
          message:"User registerd successfully",
@@ -69,7 +71,7 @@ exports.register = async(req,res,next)=>{
 exports.verifyEmail = async(req,res,next)=>{
    const emailToken = req.body.emailToken
    if(!emailToken){
-      return next(CustomError('Email Token not found',400))
+      return next(new CustomError('Email Token not found',400))
    }
    try {
       const user = await user_model.findOne({emailToken})
@@ -78,19 +80,20 @@ exports.verifyEmail = async(req,res,next)=>{
       user.isVerified = true
    
    await user.save()
-   const token = jwt.sign(user._id, process.env.SECRET,{expiresIn:Date.now()+ 2*60*1000})
+   const token = jwt.sign({userId:user._id}, process.env.SECRET,{expiresIn:'1d'})
    res.status(200).json({
       success:true,
-      _id: user._id,
+      message:'Email Verified successfully',
+       _id: user._id,
       name:user.name,
       username:user.username,
       email:user.email,
       password:user.password,
       role:user.role, 
       token,
-      isVerified:user?.isVerified
-
+      isVerified:user.isVerified
    })}
+
    else{
       res.status(404).json({
          success:false,
@@ -109,7 +112,10 @@ exports.login = async(req,res,next)=>{
    try {
       const {email,password} = req.body
        const user = await user_model.findOne({email})
-      if(!user || !user.comparedPassword(password)){
+       if(!user.isVerified){
+         return next(new CustomError("Please verifed your email first",400))
+       }
+      if(!(user && (await user.comparedPassword(password)))){
          return next(new CustomError("Email and password does not match",400))
       }
       const token = user.jsonwebtoken()
@@ -222,7 +228,12 @@ exports.getDietExpertId = async(req,res,next)=>{
 }
 
 exports.getAllUser = async(req,res,next)=>{
-   const keyword = req.query.search
+   const keyword = req.query.search ? {
+      $or:[
+         {name:{$regex:req.query.search,$options:'i'}},
+         {email:{$regex:req.query.search,$options:'i'}},
+      ]
+   }:{}
    console.log(keyword);
    console.log("Id",req.user._id);
    try {

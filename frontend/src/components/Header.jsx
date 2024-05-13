@@ -9,12 +9,44 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useAuth } from "../store/Auth";
 import {message } from 'antd';
 import { useNavigate } from "react-router-dom";
+import { Badge } from '@mui/material';
+
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:8000');
 const Header = () => {
     const navigate = useNavigate()
     const [forceUpdate, setForceUpdate] = useState(false);
     const [auth,setAuth] = useAuth()
     console.log("Auth",auth);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [notificationCount, setNotificationCount] = useState(0);
+
+    useEffect(() => {
+      socket.on('newSolutionNotification', () => {
+          setNotificationCount((prevCount) => prevCount + 1);
+      });
+
+      return () => {
+          socket.off('newSolutionNotification');
+      };
+  }, []);
+    // useEffect(() => {
+    //   console.log(" Before Notification", notificationCount);
+    //   socket.on('newSolutionNotification', () => {
+    //     setNotificationCount((prevCount) => prevCount + 1);
+    //   });
+    
+    //   return () => {
+    //     socket.off('newSolutionNotification');
+    //   };
+    // }, []);
+    
+    // useEffect(() => {
+    //   console.log("After Notification", notificationCount);
+    // }, [notificationCount]);
+         
+    
     // hndle menu click
     const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);
@@ -167,8 +199,18 @@ const Header = () => {
                 </NavLink>
                 </li>)} */}
                 <li>
-                  <NotificationsIcon className="notification"/>
+                <NavLink to={'/MyQuries'}>
+                 <NotificationsIcon className="notification" />
+                 </NavLink>
                 </li>
+
+{/* <li>
+  <IconButton aria-label="show notifications" color="black">
+    {notificationCount > 0 && <span className="badge">{notificationCount}</span>}
+    <NotificationsIcon />
+  </IconButton>
+</li> */}
+
                
               </ul>
             </Box>

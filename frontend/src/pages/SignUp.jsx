@@ -3,7 +3,7 @@ import { Form, Input, Radio, message} from 'antd';
 import '../styles/SignUp.css'
 import {Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
-
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const [form] = Form.useForm();
@@ -37,8 +37,7 @@ const SignUp = () => {
       },1000)
     }
     else if(response){
-        message.success("Successfully register")
-        navigate('/Login')
+      toast.success("Successfully register Please verify Yourself")
     }
       else{
         message.error(response.data.message);

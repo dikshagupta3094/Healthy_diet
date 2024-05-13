@@ -37,3 +37,22 @@
     color: black;
     cursor: pointer;
   }
+  /* .notification{
+    position: absolute;
+    top: 50px;
+  } */
+  /* .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+   */

@@ -3,7 +3,8 @@ import { Box, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/PostQuery.css'
 import { toast } from 'react-toastify';
-
+import { io } from 'socket.io-client';
+const socket  = io('http://localhost:8000')
 const PostQuery = () => {
   const [formData, setFormData] = useState({
     name:"",
@@ -15,8 +16,7 @@ const PostQuery = () => {
   const navigate = useNavigate();
   const {expertId} = useParams()
   console.log("ExpertId",expertId);
-  const handleSubmit = async (e) => {
-    
+  const handleSubmit = async (e) => { 
     e.preventDefault() // Prevent default form submission
     const getToken = () => {
       const authInfo = localStorage.getItem('auth');
@@ -44,6 +44,8 @@ const PostQuery = () => {
       toast.error('Please do not post same content again')
       }
      else if(response.message === "Query posted successfully"){
+       socket.emit('PostQuery', formData, expertId)
+       console.log( socket.emit('PostQuery', formData, expertId));
         toast.success('Query posted successfully!')
         navigate('/experts')
       }

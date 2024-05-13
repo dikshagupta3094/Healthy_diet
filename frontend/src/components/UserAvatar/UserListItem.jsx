@@ -5,8 +5,9 @@ import { ChatState } from '../../store/ChatProvider'
 
     // eslint-disable-next-line react/prop-types
     const UserListItem = ({ handleFunction }) => {
-        const { user } = ChatState();
-
+        const {user} = ChatState();
+        console.log("User",user);
+         
         return (
             <div>
                 <Box onClick={handleFunction}
@@ -36,7 +37,7 @@ import { ChatState } from '../../store/ChatProvider'
                         }}
                     />
                     <Box>
-                        {/* <Typography>{user.name}</Typography> */}
+                        <Typography>{user.name}</Typography>
                         <Typography>Diet Expert</Typography>
                         <Typography fontSize="xs">
                             <b>Email : </b>

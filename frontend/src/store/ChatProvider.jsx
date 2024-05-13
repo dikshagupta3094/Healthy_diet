@@ -13,14 +13,6 @@ const ChatProvider = ({ children }) => {
 
   const navigate = useNavigate(); 
 
-  // useEffect(() => {
-  //   const userInfo = JSON.parse(localStorage.getItem("auth"));
-  //   setUser(userInfo);
-
-  //   if (!userInfo) navigate('/login');
-    
-  // }, [navigate]);
-
   return (
     <ChatContext.Provider
       value={{
@@ -44,3 +36,11 @@ const ChatProvider = ({ children }) => {
 };
 
 export {ChatProvider,ChatState};
+
+ // useEffect(() => {
+  //   const userInfo = JSON.parse(localStorage.getItem("auth"));
+  //   setUser(userInfo);
+
+  //   if (!userInfo) navigate('/login');
+    
+  // }, [navigate]);

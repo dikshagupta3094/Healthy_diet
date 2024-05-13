@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
+import { io } from 'socket.io-client';
+const socket  = io('http://localhost:8000')
 function PostSolution() {
     const [content,setContent] = useState('')
     const navigate  = useNavigate()
@@ -29,6 +30,8 @@ function PostSolution() {
         console.log(response);
         if(response.message === "Solution posted successfully"){
             toast.success('Solution posted successfully')
+            socket.emit('postSolution', content, queryId);
+            console.log( socket.emit('postSolution', content, queryId));
             navigate('/')
         }
         else{
