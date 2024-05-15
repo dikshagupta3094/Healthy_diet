@@ -91,7 +91,7 @@ exports.verifyEmail = async(req,res,next)=>{
       password:user.password,
       role:user.role, 
       token,
-      isVerified:user.isVerified
+      isVerified:user?.isVerified
    })}
 
    else{
@@ -111,7 +111,13 @@ exports.verifyEmail = async(req,res,next)=>{
 exports.login = async(req,res,next)=>{
    try {
       const {email,password} = req.body
+      console.log("Email",email);
        const user = await user_model.findOne({email})
+       console.log("quereis",{email})
+       console.log("user",user);
+       if(!user){
+         return next(new CustomError("Email not found",400))
+       }
        if(!user.isVerified){
          return next(new CustomError("Please verifed your email first",400))
        }

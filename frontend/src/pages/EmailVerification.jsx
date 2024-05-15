@@ -37,70 +37,32 @@ const EmailVerification = () => {
     return (
         <>
             {validUrl ? (
-                <div>
-                    <img src={verifiedEmail} alt='success_img' />
-                    <Typography>
-                        Email Verified Successfully
-                    </Typography>
-                    <NavLink to='/login'>
-                        <Button color='primary' variant='contained'>
-                            Login
-                        </Button>
-                    </NavLink>
-                </div>
-            ) : (
-                <div>
-                    <Typography variant="h1">
-                        404 - Not Found
-                    </Typography>
-                </div>
+                <div style={{display:"flex", flexDirection:"column",height:"100vh", justifyContent:"center", alignItems:"center"}}>
+
+                <img src={verifiedEmail} alt="success_img" style={{
+                    width:"150px",
+                    height:"150px",
+                }} />
+                <Typography variant="h5" marginY={'20px'}>Email Verified Successfully</Typography>
+                <NavLink to="/login">
+                  <Button color="primary" variant="contained" sx={{
+                    padding:"10px"
+                  }}>
+                    Go to Login
+                  </Button>
+                </NavLink>
+              </div> 
+              ) : ( 
+              <div>
+                 {/* <PageNotFound/> */}
+              </div> 
             )}
         </>
     );
 };
 
 
+
 export default EmailVerification;
-
-// import React from 'react';
-// import { Button, Typography } from '@mui/material';
-// import { useParams } from 'react-router-dom';
-
-// const EmailVerification = () => {
-//     const { emailToken } = useParams();
-
-//     const handleVerifyEmail = async () => {
-//         try {
-//             let response = await fetch(`http://localhost:8000/api/auth/verifyEmail`, {
-//                 method: 'POST',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify({ emailToken })
-//             });
-//             const data = await response.json();
-//             if (data.success) {
-//                 // Email verified successfully
-//                 // You can provide feedback to the user here
-//                 console.log('Email verified successfully');
-//             } else {
-//                 // Email verification failed
-//                 // You can provide feedback to the user here
-//                 console.error('Email verification failed');
-//             }
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <Typography variant="h1">Email Verification</Typography>
-//             <Button onClick={handleVerifyEmail} variant="contained" color="primary">
-//                 Verify Email
-//             </Button>
-//         </div>
-//     );
-// };
-
-// export default EmailVerification;
 
 

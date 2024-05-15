@@ -3,6 +3,7 @@ const post_solution = require('../models/postSolution.model.js')
 const CustomError = require('../utilis/customError.utilis.js')
 const sendEmail = require('../utilis/sendEmail.utilis.js')
 const user_model = require('../models/user.model.js')
+const { Types: { ObjectId } } = require('mongoose');
 
 exports.postSolution = async(req,res,next)=>{
   const queryId = req.params.queryId
@@ -69,57 +70,35 @@ exports.postSolution = async(req,res,next)=>{
 }
 
 
-exports.viewSolution = async (req, res, next) => {
-  const userId = req.user._id; 
+
+
+
+exports.viewSolution = async(req,res,next)=>{
   const queryId = req.params.queryId
   
-  console.log("userId",userId);
-  console.log("queryId",queryId);
-  try {
-    const query = await post_query.findOne({
-      userId: userId,
-      _id: queryId // Assuming queryId is the _id field of the query document
-    });
-     console.log("Query",query);
-    if (!query) {
-      return res.status(400).json({
-        success: false,
-        message: 'Query not found',
-      });
-    }
+   try {
+    const solution = await post_solution.findOne({queryId})
 
-    // const solution = await post_solution.findOne({ _id:solution });
-    const solution = await post_solution.findOne({ _id: query.solutionId });
-
-    if (!solution) {
-      return res.status(400).json({
-        success: false,
-        message: 'Solution not found',
-      });
+    if(!solution){
+      res.status(400).json({messgae:'Query id not found'})
     }
-    return res.status(200).json({
-      success: true,
-      solution,
-    });
-  } catch (error) {
-    console.log(error);
+    res.status(200).json({
+      success:true,
+      message:"Solution fetched",
+      solution
+    })
+   } catch (error) {
     res.status(500).json({
-      success: false,
-      message: 'Error while fetching solution',
-    });
-  }
-};
-
+      success:true,
+      message:"Solution fetched"
+    })
+     console.log(error)
+   }
+}
 exports.fetchQueries = async(req,res,next)=>{
   try {
     const queries = await post_query.find()
     console.log("All queries",queries);
-    // const userQueries = queries.filter(query => query.userId === req.user._id)
-    // const userQueries = queries.filter(query => {
-    //   console.log("Query userId:", query.userId, typeof query.userId);
-    //   console.log("Req userId:", req.user._id, typeof req.user._id);
-    //   return query.userId === req.user._id;
-    // });
     const userQueries = queries.filter(query => query.userId.equals(req.user._id));
 
     console.log(userQueries);   

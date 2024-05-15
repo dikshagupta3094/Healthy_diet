@@ -14,8 +14,8 @@ import ViewQuery from './pages/ViewQuery'
 import PostSolution from './pages/PostSolution'
 import ChatPage from './pages/ChatPage'
 import EmailVerification from './pages/EmailVerification'
-import VerificationInfo from './pages/VerificationInfo'
 import ViewSolution from './pages/ViewSolution';
+import ViewSolutionQuery from './pages/ViewSolutionQuery'
 import {io} from 'socket.io-client'
 import { useEffect} from 'react';
 function App() {
@@ -25,7 +25,6 @@ function App() {
       socket.on("connect",()=>{
         console.log("Connected");
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
   return (
     <>  
@@ -35,7 +34,6 @@ function App() {
       <Route path="/resetPassword/:token" element={<ResetPassword/>}/>
       <Route path="/signup" element={<SignUp />} />
       <Route path='/emailVerification/:emailToken' element={<EmailVerification/>}/>
-      <Route path='/VerificationInfo' element={<VerificationInfo/>}/>
       <Route path="/about" element={<About/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/ViewQuery" element={<ViewQuery/>}/>
@@ -44,6 +42,7 @@ function App() {
       <Route path="/PostQuery/:expertId" element={<PostQuery/>}/>
       <Route path='/ViewQuery/PostSolution/:queryId' element = {<PostSolution/>}/>
       <Route path='/MyQuries' element ={<ViewSolution/>}/>
+      <Route path='/MyQuries/viewSolution/:queryId' element = {<ViewSolutionQuery/>}/>
       <Route path="/ChatPage" element={<ChatPage/>}/>
       <Route path="*" element={< PageNotFound/>}/>
     </Routes>

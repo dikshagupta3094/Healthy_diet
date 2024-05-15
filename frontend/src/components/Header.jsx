@@ -16,7 +16,6 @@ import { io } from 'socket.io-client';
 const socket = io('http://localhost:8000');
 const Header = () => {
     const navigate = useNavigate()
-    const [forceUpdate, setForceUpdate] = useState(false);
     const [auth,setAuth] = useAuth()
     console.log("Auth",auth);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -31,20 +30,7 @@ const Header = () => {
           socket.off('newSolutionNotification');
       };
   }, []);
-    // useEffect(() => {
-    //   console.log(" Before Notification", notificationCount);
-    //   socket.on('newSolutionNotification', () => {
-    //     setNotificationCount((prevCount) => prevCount + 1);
-    //   });
     
-    //   return () => {
-    //     socket.off('newSolutionNotification');
-    //   };
-    // }, []);
-    
-    // useEffect(() => {
-    //   console.log("After Notification", notificationCount);
-    // }, [notificationCount]);
          
     
     // hndle menu click
@@ -177,41 +163,11 @@ const Header = () => {
 
           </>
 )}
-
-                {/* <li>
-                  <NavLink to={"/experts"}>Our Experts</NavLink>
-                </li>
-                <li>
-                  <NavLink to = {'/ViewQuery'}> View Query </NavLink>
-                </li>
-                {isLoggedIn === true? ( <li>
-                  <Button variant="outlined" size="small" color="error" 
-                   sx={{marginTop: "2px"}} onClick={()=>{handleLogout()}}>
-                    Logout
-                   <LogoutIcon/>
-                  </Button>
-                </li> ): ( <li>
-                <NavLink to={"/login"}>
-                  <Button variant="outlined" size="small" color="error" 
-                   sx={{marginTop: "2px"}}>
-                    Login
-                  </Button>
-                </NavLink>
-                </li>)} */}
                 <li>
                 <NavLink to={'/MyQuries'}>
                  <NotificationsIcon className="notification" />
                  </NavLink>
-                </li>
-
-{/* <li>
-  <IconButton aria-label="show notifications" color="black">
-    {notificationCount > 0 && <span className="badge">{notificationCount}</span>}
-    <NotificationsIcon />
-  </IconButton>
-</li> */}
-
-               
+                </li> 
               </ul>
             </Box>
           </Toolbar>

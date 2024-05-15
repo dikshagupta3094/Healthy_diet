@@ -6,6 +6,11 @@ const postSolutionSchema = new mongoose.Schema({
         ref:'PostQuery',
         required:true
     },
+    queryId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user',
+        
+    },
     content:{
         type:String,
         required:true
