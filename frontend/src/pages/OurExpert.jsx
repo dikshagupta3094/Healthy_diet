@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Dietitians from "../components/Dietitians";
+import DefaultImage from '../assets/default-avatar.jpg'
 import {
   Box,
   Typography,Button
 } from "@mui/material";
 
-import Dt1 from "../assets/dt-1.jpg";
 import "../styles/OurExpert.css"
 import { useState,useEffect } from "react";
 const OurExpert = () =>{
@@ -65,7 +65,7 @@ return(
               avatar = "R"
               title = {`Dt.${dietExpert.name}`}
               subheader = "Health Coach"
-              img = {Dt1}
+              img = {DefaultImage}
               description = "Silky Mahajan truly empowers her clients. Her guidance goes beyond just meal plans - she fosters a positive relationship with food, creating a sustainable and healthy lifestyle."
           />
               )

@@ -20,30 +20,11 @@ import {
   import "../styles/OurExpert.css"
   import { Link, NavLink } from "react-router-dom";
   import { useState,useEffect } from "react";
-// import { postQuery } from "../../../Backend/controller/query.controller";
-//Making Changes
-//  const fetchDietExpertId = async()=>{
-//        try {
-//         const response = await fetch('http://localhost:8000/api/auth/getDietExpertId',{
-//         method:'GET'
-//        })
-//        if(!response.ok){
-//         throw new Error('Error occured')
-//        }
-//        const data = await response.json()
-//        console.log("Expert Data",data);
-//         data.dietExpert
-//         console.log("Set diet expert",  setDietExpertId(data));
-//        } catch (error) {
-//          console.log(error);
-//        }
 
-//   }
-  
 function Dietitians(props){
     const [anchorEl, setAnchorEl] = useState(null);
   
-    const handleClick = (event) => {
+    const handleClick = (event) => {                                                  
       setAnchorEl(event.currentTarget);
     };
   
@@ -54,27 +35,6 @@ function Dietitians(props){
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
    
-    
-    // const [dietExpert,setDietExpertId] = useState([])
-    //  useEffect(()=>{
-    //     const fetchExpertIds  = async()=>{
-    //       try {
-    //         const response = await fetch('http://localhost:8000/api/auth/getDietExpertId',{
-    //            method:'GET'
-    //         })
-    //         if (!response.ok) {
-    //           throw new Error('Failed to fetch dietitians');
-    //         }
-    //         const data = await response.json()
-    //         console.log(data);
-    //         setDietExpertId(data.UsersId)
-    //         console.log("Diet Id",data.UsersId);
-    //       } catch (error) {
-    //         console.log("Error while fetching expert Id",error);
-    //       }
-    //     }
-    //     fetchExpertIds()
-    //  },[])
     return(
       <Box
       sx={{
@@ -109,9 +69,6 @@ function Dietitians(props){
         </CardContent>
     
         <CardActions disableSpacing>
-          {/* {dietExpert.length > 0 && dietExpert.map((id,index)=>{
-              console.log("Mapping dietitian with id:", id); */}
-            {/* return( */}
               <NavLink to= {`/postQuery/${props.dietitianId}`}>
               <Button variant="contained"
                 sx={{

@@ -17,7 +17,7 @@ function ViewSolutionQuery() {
      useEffect(()=>{
         const fectSolution = async()=>{
        try {
-        let response = await fetch(`http://localhost:8000/api/solution/viewSolution/${queryId}`,{
+        let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/solution/viewSolution/${queryId}`,{
             method:'GET',
             headers:{
                 'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ function PostSolution() {
        return token;
     };
      try {
-        let response = await fetch(`http://localhost:8000/api/solution/postSolution/${queryId}`,{
+        let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/solution/postSolution/${queryId}`,{
             method:'POST',
             headers:{
                 'x-access-token':getToken(),

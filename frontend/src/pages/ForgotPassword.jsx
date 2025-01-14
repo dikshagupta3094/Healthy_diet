@@ -10,7 +10,7 @@ const [email,setEmail] = useState({email:""})
   const navigate = useNavigate();
   const onfinishHandler = async (email) => {
     try {
-      let response = await fetch('http://localhost:8000/api/auth/forgotPassword',{
+      let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/forgotPassword`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(email),

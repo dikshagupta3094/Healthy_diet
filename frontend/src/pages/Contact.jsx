@@ -30,7 +30,7 @@ const Contact = () => {
       email: email.value,
       message: message.value,
     };
-    let response = await fetch("http://localhost:5173/contact", {
+    let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

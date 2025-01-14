@@ -13,7 +13,7 @@ const [password,setPassword] = useState({password:""})
   const {token} = useParams()
   const onfinishHandler = async (password) => {
     try {
-      let response = await fetch(`http://localhost:8000/api/auth/resetPassword/${token}`,{
+      let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/resetPassword/${token}`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(password),

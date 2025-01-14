@@ -12,7 +12,7 @@ const EmailVerification = () => {
     useEffect(() => {
         const verifyEmail = async () => {
             try {
-                let response = await fetch(`http://localhost:8000/api/auth/verifyEmail`, {
+                let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verifyEmail`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ emailToken })

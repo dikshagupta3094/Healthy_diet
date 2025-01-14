@@ -40,21 +40,44 @@ const MyQueries = () => {
 
   return (
     <div>
-      <h2>My Queries</h2>
-      <ul>
+    <h2 style={{
+      fontFamily:"Work Sans",
+      textAlign:'center',
+      padding:"20px"
+    }}>My Queries</h2>
+    <div style={{
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems:"center",
+      height:"85vh",
+      overflowY:'hidden',
+    }}>
+      <ul style={{ listStyle:"none"}}>
         {queries.length>0 && queries.map((query)=>{
           return(
             <li key={query._id}>
-           content:  {query.content} status :{query.status}
-             <NavLink to= {`viewSolution/${query._id}`}>
-              <button>
+          <li style={{fontSize:"18px",padding:"10px"}}> Content:  {query.content}</li>
+          <li style={{fontSize:"18px",padding:"10px"}}> Status :{query.status}</li>
+             <li style={{fontSize:"18px",padding:"10px"}}><NavLink to= {`viewSolution/${query._id}`}>
+              <button style={{
+                 
+                  padding:"12px", 
+                  fontSize:"18px",
+                  backgroundColor:"#65b741",
+                  color:"white",
+                
+                  borderColor:"transparent",
+                  borderRadius:"7px"
+              }}>
               View Solution
               </button>
-             </NavLink>
+             </NavLink></li>
           </li>
           )
         })}
       </ul>
+    </div>
     </div>
   );
 };

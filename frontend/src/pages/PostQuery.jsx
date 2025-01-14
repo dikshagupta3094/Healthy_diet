@@ -29,7 +29,7 @@ const PostQuery = () => {
     const token = getToken()
     console.log(token);
     try {
-      let response = await fetch(`http://localhost:8000/api/query/postQuery/${expertId}`,{
+      let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/query/postQuery/${expertId}`,{
         method: 'POST',
         headers: {
           'x-access-token': getToken(),

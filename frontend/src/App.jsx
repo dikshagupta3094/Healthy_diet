@@ -20,7 +20,7 @@ import {io} from 'socket.io-client'
 import { useEffect} from 'react';
 function App() {
   //Socket io
-  const socket = io('http://localhost:8000')
+  const socket = io(`${import.meta.env.VITE_BACKEND_URL}`)
     useEffect(()=>{
       socket.on("connect",()=>{
         console.log("Connected");

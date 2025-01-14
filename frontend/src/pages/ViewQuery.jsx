@@ -18,7 +18,7 @@ function ViewQuery() {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        let response = await fetch('http://localhost:8000/api/query/viewQuery', {
+        let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/query/viewQuery`, {
           method: 'GET',
           headers: {
             'x-access-token': getToken(),
